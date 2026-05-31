@@ -41,26 +41,26 @@
   <h1>QA Audit Report</h1>
   <p>Structured quality review generated from the configured scanner pipeline.</p>
   <div class="meta">
-    <div><strong>Generated</strong> 2026-05-31T14:01:19.625Z</div>
+    <div><strong>Generated</strong> 2026-05-31T14:30:38.990Z</div>
     <div><strong>Target path</strong> C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</div>
     <div><strong>Base URL</strong> http://127.0.0.1:3100</div>
   </div>
   <h2>Overall Summary</h2>
   <div class="summary-grid">
-    <div class="summary-card summary-total"><span>Total</span><strong>33</strong></div>
-    <div class="summary-card summary-pass"><span>Pass</span><strong>15</strong></div>
-    <div class="summary-card summary-warn"><span>Warn</span><strong>16</strong></div>
+    <div class="summary-card summary-total"><span>Total</span><strong>20</strong></div>
+    <div class="summary-card summary-pass"><span>Pass</span><strong>6</strong></div>
+    <div class="summary-card summary-warn"><span>Warn</span><strong>9</strong></div>
     <div class="summary-card summary-fail"><span>Fail</span><strong>0</strong></div>
-    <div class="summary-card summary-skipped"><span>Skipped</span><strong>2</strong></div>
+    <div class="summary-card summary-skipped"><span>Skipped</span><strong>5</strong></div>
   </div>
-  <p class="narrative">Audit completed without failed checks. Review 16 warnings and confirm whether each risk is acceptable or requires remediation.</p>
+  <p class="narrative">Audit completed without failed checks. Review 9 warnings and confirm whether each risk is acceptable or requires remediation.</p>
   <div class="severity-panel">
     <strong>Severity counts:</strong>
     <span>Critical 0</span>
     <span>High 1</span>
-    <span>Medium 9</span>
-    <span>Low 6</span>
-    <span>Info 17</span>
+    <span>Medium 1</span>
+    <span>Low 7</span>
+    <span>Info 11</span>
   </div>
   <h2>Findings</h2>
   <section class="category">
@@ -127,42 +127,30 @@
   </article></div>
       </section>
 <section class="category">
-        <h2>api <span>3 checks</span></h2>
-        <div class="finding-list"><article class="finding finding-pass">
+        <h2>api <span>2 checks</span></h2>
+        <div class="finding-list"><article class="finding finding-warn">
     <header class="finding-header">
       <div>
-        <span class="status status-pass">pass</span>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-low">low</span>
+      </div>
+      <code>static-contract-fallback</code>
+    </header>
+    <p class="finding-text">API runtime checks were skipped and no common API contract or source hints were found.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Add an OpenAPI file or document route, controller, and schema locations to support dormant-project API analysis.</p>
+
+  </article>
+<article class="finding finding-skipped">
+    <header class="finding-header">
+      <div>
+        <span class="status status-skipped">skipped</span>
         <span class="severity severity-info">info</span>
       </div>
       <code>api-runtime</code>
     </header>
-    <p class="finding-text">API runtime service is reachable at the configured baseUrl.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Review configured endpoint findings and keep the runtime target configuration current.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100</li></ul></div>
-  </article>
-<article class="finding finding-pass">
-    <header class="finding-header">
-      <div>
-        <span class="status status-pass">pass</span>
-        <span class="severity severity-info">info</span>
-      </div>
-      <code>endpoint:Health</code>
-    </header>
-    <p class="finding-text">Health endpoint returned status 200 in 2ms with the expected basic response shape.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Keep endpoint expectations current as the API contract evolves.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/health</li><li>status=200</li><li>durationMs=2</li><li>contentType=application/json; charset=utf-8</li></ul></div>
-  </article>
-<article class="finding finding-pass">
-    <header class="finding-header">
-      <div>
-        <span class="status status-pass">pass</span>
-        <span class="severity severity-info">info</span>
-      </div>
-      <code>endpoint:Users</code>
-    </header>
-    <p class="finding-text">Users endpoint returned status 200 in 4ms with the expected basic response shape.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Keep endpoint expectations current as the API contract evolves.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/api/users</li><li>status=200</li><li>durationMs=4</li><li>contentType=application/json; charset=utf-8</li></ul></div>
+    <p class="finding-text">API runtime checks skipped because the configured local service is unreachable.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Start the local API service and rerun the audit. Review static fallback evidence while the service is dormant.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/health</li></ul></div>
   </article></div>
       </section>
 <section class="category">
@@ -253,7 +241,7 @@
   </article></div>
       </section>
 <section class="category">
-        <h2>security <span>7 checks</span></h2>
+        <h2>security <span>5 checks</span></h2>
         <div class="finding-list"><article class="finding finding-warn">
     <header class="finding-header">
       <div>
@@ -266,41 +254,17 @@
     <p class="recommendation"><strong>Recommendation:</strong> Review each match. Move real secrets to environment variables or a secret manager and rotate any credential that may have been exposed.</p>
 <div class="evidence"><strong>Evidence</strong><ul><li>fixtures/intentional-fake-secret.env: API_KEY assignment</li><li>fixtures/intentional-fake-secret.env: sk_ prefix</li></ul></div>
   </article>
-<article class="finding finding-warn">
+<article class="finding finding-skipped">
     <header class="finding-header">
       <div>
-        <span class="status status-warn">warn</span>
-        <span class="severity severity-medium">medium</span>
-      </div>
-      <code>cors-policy</code>
-    </header>
-    <p class="finding-text">Runtime response allows requests from any origin with Access-Control-Allow-Origin: *.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Restrict CORS to explicitly trusted origins unless unrestricted public access is intentional.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/</li></ul></div>
-  </article>
-<article class="finding finding-warn">
-    <header class="finding-header">
-      <div>
-        <span class="status status-warn">warn</span>
-        <span class="severity severity-medium">medium</span>
-      </div>
-      <code>security-headers</code>
-    </header>
-    <p class="finding-text">Runtime response is missing recommended security headers: content-security-policy, x-frame-options, x-content-type-options, referrer-policy.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Configure the service or reverse proxy to send appropriate browser security headers.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/</li></ul></div>
-  </article>
-<article class="finding finding-pass">
-    <header class="finding-header">
-      <div>
-        <span class="status status-pass">pass</span>
+        <span class="status status-skipped">skipped</span>
         <span class="severity severity-info">info</span>
       </div>
-      <code>debug-endpoints</code>
+      <code>runtime-security</code>
     </header>
-    <p class="finding-text">No common debug or API documentation endpoints returned a successful response.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Continue reviewing framework-specific debug routes separately.</p>
-
+    <p class="finding-text">Runtime security checks skipped because the configured service is unreachable.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Start the local target service and rerun the audit to inspect runtime security behavior.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/</li></ul></div>
   </article>
 <article class="finding finding-pass">
     <header class="finding-header">
@@ -340,138 +304,18 @@
   </article></div>
       </section>
 <section class="category">
-        <h2>ui <span>11 checks</span></h2>
-        <div class="finding-list"><article class="finding finding-warn">
+        <h2>ui <span>1 checks</span></h2>
+        <div class="finding-list"><article class="finding finding-skipped">
     <header class="finding-header">
       <div>
-        <span class="status status-warn">warn</span>
-        <span class="severity severity-medium">medium</span>
-      </div>
-      <code>page:Home:desktop:broken-images</code>
-    </header>
-    <p class="finding-text">Home contains 1 broken image at desktop.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Fix or remove image references that do not load successfully.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>/images/missing-dashboard-preview.png</li></ul></div>
-  </article>
-<article class="finding finding-warn">
-    <header class="finding-header">
-      <div>
-        <span class="status status-warn">warn</span>
-        <span class="severity severity-medium">medium</span>
-      </div>
-      <code>page:Home:desktop:console-errors</code>
-    </header>
-    <p class="finding-text">Home emitted 2 browser console errors at desktop.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Investigate and remove unexpected browser console errors.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>Intentional demo UI console error for QA audit detection.</li><li>Failed to load resource: the server responded with a status of 404 (Not Found)</li></ul></div>
-  </article>
-<article class="finding finding-warn">
-    <header class="finding-header">
-      <div>
-        <span class="status status-warn">warn</span>
-        <span class="severity severity-medium">medium</span>
-      </div>
-      <code>page:Home:desktop:missing-alt</code>
-    </header>
-    <p class="finding-text">Home contains 1 image without alt text at desktop.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Add meaningful alt text for informative images or an empty alt attribute for decorative images.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>/images/missing-dashboard-preview.png</li></ul></div>
-  </article>
-<article class="finding finding-warn">
-    <header class="finding-header">
-      <div>
-        <span class="status status-warn">warn</span>
-        <span class="severity severity-medium">medium</span>
-      </div>
-      <code>page:Home:mobile:broken-images</code>
-    </header>
-    <p class="finding-text">Home contains 1 broken image at mobile.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Fix or remove image references that do not load successfully.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>/images/missing-dashboard-preview.png</li></ul></div>
-  </article>
-<article class="finding finding-warn">
-    <header class="finding-header">
-      <div>
-        <span class="status status-warn">warn</span>
-        <span class="severity severity-medium">medium</span>
-      </div>
-      <code>page:Home:mobile:console-errors</code>
-    </header>
-    <p class="finding-text">Home emitted 2 browser console errors at mobile.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Investigate and remove unexpected browser console errors.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>Intentional demo UI console error for QA audit detection.</li><li>Failed to load resource: the server responded with a status of 404 (Not Found)</li></ul></div>
-  </article>
-<article class="finding finding-warn">
-    <header class="finding-header">
-      <div>
-        <span class="status status-warn">warn</span>
-        <span class="severity severity-medium">medium</span>
-      </div>
-      <code>page:Home:mobile:missing-alt</code>
-    </header>
-    <p class="finding-text">Home contains 1 image without alt text at mobile.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Add meaningful alt text for informative images or an empty alt attribute for decorative images.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>/images/missing-dashboard-preview.png</li></ul></div>
-  </article>
-<article class="finding finding-pass">
-    <header class="finding-header">
-      <div>
-        <span class="status status-pass">pass</span>
-        <span class="severity severity-info">info</span>
-      </div>
-      <code>page:Home:desktop:accessibility-baseline</code>
-    </header>
-    <p class="finding-text">Home passed the lightweight accessibility baseline at desktop.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Run a dedicated accessibility tool for broader WCAG coverage.</p>
-
-  </article>
-<article class="finding finding-pass">
-    <header class="finding-header">
-      <div>
-        <span class="status status-pass">pass</span>
-        <span class="severity severity-info">info</span>
-      </div>
-      <code>page:Home:desktop:load</code>
-    </header>
-    <p class="finding-text">Home loaded at desktop with status 200.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Keep this page path covered as the UI evolves.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/</li><li>viewport=1440x900</li></ul></div>
-  </article>
-<article class="finding finding-pass">
-    <header class="finding-header">
-      <div>
-        <span class="status status-pass">pass</span>
-        <span class="severity severity-info">info</span>
-      </div>
-      <code>page:Home:mobile:accessibility-baseline</code>
-    </header>
-    <p class="finding-text">Home passed the lightweight accessibility baseline at mobile.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Run a dedicated accessibility tool for broader WCAG coverage.</p>
-
-  </article>
-<article class="finding finding-pass">
-    <header class="finding-header">
-      <div>
-        <span class="status status-pass">pass</span>
-        <span class="severity severity-info">info</span>
-      </div>
-      <code>page:Home:mobile:load</code>
-    </header>
-    <p class="finding-text">Home loaded at mobile with status 200.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Keep this page path covered as the UI evolves.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/</li><li>viewport=390x844</li></ul></div>
-  </article>
-<article class="finding finding-pass">
-    <header class="finding-header">
-      <div>
-        <span class="status status-pass">pass</span>
+        <span class="status status-skipped">skipped</span>
         <span class="severity severity-info">info</span>
       </div>
       <code>ui-runtime</code>
     </header>
-    <p class="finding-text">UI runtime service is reachable and Playwright Chromium launched successfully.</p>
-    <p class="recommendation"><strong>Recommendation:</strong> Review configured page findings and keep the runtime target configuration current.</p>
-<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100</li></ul></div>
+    <p class="finding-text">UI runtime checks skipped because the configured local service is unreachable.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Start the local UI service and rerun the audit to enable Playwright checks.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/</li></ul></div>
   </article></div>
       </section>
 </main>

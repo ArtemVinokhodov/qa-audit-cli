@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-05-31T14:01:19.625Z",
+  "generatedAt": "2026-05-31T14:30:38.990Z",
   "targetProjectPath": "C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project",
   "baseUrl": "http://127.0.0.1:3100",
   "summary": {
-    "total": 33,
-    "pass": 15,
-    "warn": 16,
+    "total": 20,
+    "pass": 6,
+    "warn": 9,
     "fail": 0,
-    "skipped": 2,
+    "skipped": 5,
     "severityCounts": {
       "critical": 0,
       "high": 1,
-      "medium": 9,
-      "low": 6,
-      "info": 17
+      "medium": 1,
+      "low": 7,
+      "info": 11
     },
-    "narrative": "Audit completed without failed checks. Review 16 warnings and confirm whether each risk is acceptable or requires remediation."
+    "narrative": "Audit completed without failed checks. Review 9 warnings and confirm whether each risk is acceptable or requires remediation."
   },
   "items": [
     {
@@ -133,207 +133,47 @@
     {
       "scanner": "security",
       "category": "security",
-      "checkName": "security-headers",
-      "status": "warn",
-      "severity": "medium",
-      "finding": "Runtime response is missing recommended security headers: content-security-policy, x-frame-options, x-content-type-options, referrer-policy.",
-      "recommendation": "Configure the service or reverse proxy to send appropriate browser security headers.",
-      "evidence": [
-        "http://127.0.0.1:3100/"
-      ]
-    },
-    {
-      "scanner": "security",
-      "category": "security",
-      "checkName": "cors-policy",
-      "status": "warn",
-      "severity": "medium",
-      "finding": "Runtime response allows requests from any origin with Access-Control-Allow-Origin: *.",
-      "recommendation": "Restrict CORS to explicitly trusted origins unless unrestricted public access is intentional.",
-      "evidence": [
-        "http://127.0.0.1:3100/"
-      ]
-    },
-    {
-      "scanner": "security",
-      "category": "security",
-      "checkName": "debug-endpoints",
-      "status": "pass",
+      "checkName": "runtime-security",
+      "status": "skipped",
       "severity": "info",
-      "finding": "No common debug or API documentation endpoints returned a successful response.",
-      "recommendation": "Continue reviewing framework-specific debug routes separately."
+      "finding": "Runtime security checks skipped because the configured service is unreachable.",
+      "recommendation": "Start the local target service and rerun the audit to inspect runtime security behavior.",
+      "evidence": [
+        "http://127.0.0.1:3100/"
+      ]
     },
     {
       "scanner": "api",
       "category": "api",
       "checkName": "api-runtime",
-      "status": "pass",
+      "status": "skipped",
       "severity": "info",
-      "finding": "API runtime service is reachable at the configured baseUrl.",
-      "recommendation": "Review configured endpoint findings and keep the runtime target configuration current.",
+      "finding": "API runtime checks skipped because the configured local service is unreachable.",
+      "recommendation": "Start the local API service and rerun the audit. Review static fallback evidence while the service is dormant.",
       "evidence": [
-        "http://127.0.0.1:3100"
+        "http://127.0.0.1:3100/health"
       ]
     },
     {
       "scanner": "api",
       "category": "api",
-      "checkName": "endpoint:Health",
-      "status": "pass",
-      "severity": "info",
-      "finding": "Health endpoint returned status 200 in 2ms with the expected basic response shape.",
-      "recommendation": "Keep endpoint expectations current as the API contract evolves.",
-      "evidence": [
-        "http://127.0.0.1:3100/health",
-        "status=200",
-        "durationMs=2",
-        "contentType=application/json; charset=utf-8"
-      ]
-    },
-    {
-      "scanner": "api",
-      "category": "api",
-      "checkName": "endpoint:Users",
-      "status": "pass",
-      "severity": "info",
-      "finding": "Users endpoint returned status 200 in 4ms with the expected basic response shape.",
-      "recommendation": "Keep endpoint expectations current as the API contract evolves.",
-      "evidence": [
-        "http://127.0.0.1:3100/api/users",
-        "status=200",
-        "durationMs=4",
-        "contentType=application/json; charset=utf-8"
-      ]
+      "checkName": "static-contract-fallback",
+      "status": "warn",
+      "severity": "low",
+      "finding": "API runtime checks were skipped and no common API contract or source hints were found.",
+      "recommendation": "Add an OpenAPI file or document route, controller, and schema locations to support dormant-project API analysis."
     },
     {
       "scanner": "ui",
       "category": "ui",
       "checkName": "ui-runtime",
-      "status": "pass",
+      "status": "skipped",
       "severity": "info",
-      "finding": "UI runtime service is reachable and Playwright Chromium launched successfully.",
-      "recommendation": "Review configured page findings and keep the runtime target configuration current.",
+      "finding": "UI runtime checks skipped because the configured local service is unreachable.",
+      "recommendation": "Start the local UI service and rerun the audit to enable Playwright checks.",
       "evidence": [
-        "http://127.0.0.1:3100"
+        "http://127.0.0.1:3100/"
       ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:mobile:load",
-      "status": "pass",
-      "severity": "info",
-      "finding": "Home loaded at mobile with status 200.",
-      "recommendation": "Keep this page path covered as the UI evolves.",
-      "evidence": [
-        "http://127.0.0.1:3100/",
-        "viewport=390x844"
-      ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:mobile:console-errors",
-      "status": "warn",
-      "severity": "medium",
-      "finding": "Home emitted 2 browser console errors at mobile.",
-      "recommendation": "Investigate and remove unexpected browser console errors.",
-      "evidence": [
-        "Intentional demo UI console error for QA audit detection.",
-        "Failed to load resource: the server responded with a status of 404 (Not Found)"
-      ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:mobile:broken-images",
-      "status": "warn",
-      "severity": "medium",
-      "finding": "Home contains 1 broken image at mobile.",
-      "recommendation": "Fix or remove image references that do not load successfully.",
-      "evidence": [
-        "/images/missing-dashboard-preview.png"
-      ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:mobile:missing-alt",
-      "status": "warn",
-      "severity": "medium",
-      "finding": "Home contains 1 image without alt text at mobile.",
-      "recommendation": "Add meaningful alt text for informative images or an empty alt attribute for decorative images.",
-      "evidence": [
-        "/images/missing-dashboard-preview.png"
-      ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:mobile:accessibility-baseline",
-      "status": "pass",
-      "severity": "info",
-      "finding": "Home passed the lightweight accessibility baseline at mobile.",
-      "recommendation": "Run a dedicated accessibility tool for broader WCAG coverage."
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:desktop:load",
-      "status": "pass",
-      "severity": "info",
-      "finding": "Home loaded at desktop with status 200.",
-      "recommendation": "Keep this page path covered as the UI evolves.",
-      "evidence": [
-        "http://127.0.0.1:3100/",
-        "viewport=1440x900"
-      ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:desktop:console-errors",
-      "status": "warn",
-      "severity": "medium",
-      "finding": "Home emitted 2 browser console errors at desktop.",
-      "recommendation": "Investigate and remove unexpected browser console errors.",
-      "evidence": [
-        "Intentional demo UI console error for QA audit detection.",
-        "Failed to load resource: the server responded with a status of 404 (Not Found)"
-      ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:desktop:broken-images",
-      "status": "warn",
-      "severity": "medium",
-      "finding": "Home contains 1 broken image at desktop.",
-      "recommendation": "Fix or remove image references that do not load successfully.",
-      "evidence": [
-        "/images/missing-dashboard-preview.png"
-      ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:desktop:missing-alt",
-      "status": "warn",
-      "severity": "medium",
-      "finding": "Home contains 1 image without alt text at desktop.",
-      "recommendation": "Add meaningful alt text for informative images or an empty alt attribute for decorative images.",
-      "evidence": [
-        "/images/missing-dashboard-preview.png"
-      ]
-    },
-    {
-      "scanner": "ui",
-      "category": "ui",
-      "checkName": "page:Home:desktop:accessibility-baseline",
-      "status": "pass",
-      "severity": "info",
-      "finding": "Home passed the lightweight accessibility baseline at desktop.",
-      "recommendation": "Run a dedicated accessibility tool for broader WCAG coverage."
     },
     {
       "scanner": "ai-risk-review",
