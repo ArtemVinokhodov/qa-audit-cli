@@ -7,8 +7,8 @@
     "build": "tsc",
     "audit": "npm run build --silent && node dist/cli.js --config qa-audit.config.example.json",
     "audit:demo": "npm run audit -- --config qa-audit.config.example.json",
-    "demo:start": "node -e \"console.log('Demo project implementation is planned for a later increment.')\"",
-    "demo:install": "node -e \"console.log('Demo project has no dependencies in the initial skeleton.')\"",
+    "demo:start": "cd demo-project && npm start",
+    "demo:install": "cd demo-project && npm install",
     "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\""
   },
   "devDependencies": {

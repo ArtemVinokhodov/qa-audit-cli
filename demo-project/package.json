@@ -1,0 +1,12 @@
+{
+  "name": "qa-audit-demo-project",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Intentionally flawed local Express target for QA Audit CLI demonstrations",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

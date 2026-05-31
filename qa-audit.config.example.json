@@ -3,7 +3,8 @@
   "outputDir": "./reports",
   "api": {
     "baseUrl": "http://127.0.0.1:3100",
-    "healthPath": "/health"
+    "healthPath": "/health",
+    "endpoints": ["/api/users"]
   },
   "ui": {
     "baseUrl": "http://127.0.0.1:3100",

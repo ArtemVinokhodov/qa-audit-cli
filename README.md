@@ -12,6 +12,23 @@ npm run audit -- --config qa-audit.config.example.json
 
 Generated placeholder reports are written to `reports/`.
 
+## Demo Project
+
+Install and start the intentionally flawed local Express target:
+
+```bash
+npm run demo:install
+npm run demo:start
+```
+
+In a second terminal, run:
+
+```bash
+npm run audit:demo
+```
+
+The demo app listens on the example URL configured in `qa-audit.config.example.json`. It exposes `/`, `/health`, and `/api/users`. Its issues are deliberately safe fixtures for later scanner implementation.
+
 ## Configuration
 
 The CLI loads `qa-audit.config.json` by default. Pass a different file with:
@@ -26,9 +43,9 @@ Target URLs, ports, paths, and future credentials must come from config or envir
 
 - `npm run build`: compile TypeScript.
 - `npm run audit`: compile and run a placeholder audit with the example config.
-- `npm run audit:demo`: run the placeholder demo audit.
-- `npm run demo:start`: placeholder until the reproducible demo service is implemented.
-- `npm run demo:install`: placeholder until the demo project has dependencies.
+- `npm run audit:demo`: run the audit against the example demo configuration.
+- `npm run demo:start`: start the local Express demo target.
+- `npm run demo:install`: install demo-project dependencies.
 - `npm run clean`: remove compiled output.
 
 ## Current Status
@@ -39,9 +56,9 @@ This increment provides the project skeleton only:
 - shared report types
 - placeholder repository, security, API, UI, and AI scanners
 - JSON and HTML placeholder report generation
-- reserved demo project and process-evidence directories
+- reproducible intentionally flawed Express demo project
 
-Scanner logic, runtime probing, Playwright checks, AI integration, tests, and the reproducible demo service remain intentionally unimplemented.
+Scanner logic, runtime probing, Playwright checks, AI integration, and tests remain intentionally unimplemented.
 
 ## Planning Notes
 

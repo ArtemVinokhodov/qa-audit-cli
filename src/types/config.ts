@@ -1,6 +1,7 @@
 export interface ApiConfig {
   baseUrl?: string;
   healthPath?: string;
+  endpoints?: string[];
 }
 
 export interface UiConfig {
