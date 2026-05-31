@@ -35,6 +35,8 @@ export interface AiConfig {
   provider?: string;
   model?: string;
   apiKeyEnv?: string;
+  maxFiles?: number;
+  fallbackMode?: "heuristic";
 }
 
 export interface AuditConfig {

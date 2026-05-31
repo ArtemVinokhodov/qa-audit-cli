@@ -12,10 +12,10 @@
 </head>
 <body>
   <h1>QA Audit Report</h1>
-  <p>Generated: 2026-05-31T13:46:10.849Z</p>
+  <p>Generated: 2026-05-31T13:52:18.932Z</p>
   <p>Target: C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</p>
   <h2>Overall Summary</h2>
-  <p>Total: 29; Pass: 15; Warn: 12; Fail: 0; Skipped: 2</p>
+  <p>Total: 20; Pass: 6; Warn: 9; Fail: 0; Skipped: 5</p>
   <h2>Findings</h2>
   <table>
     <thead><tr><th>Scanner</th><th>Category</th><th>Check</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th><th>Evidence</th></tr></thead>
@@ -132,182 +132,92 @@
 <tr>
         <td>security</td>
         <td>security</td>
-        <td>security-headers</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Runtime response is missing recommended security headers: content-security-policy, x-frame-options, x-content-type-options, referrer-policy.</td>
-        <td>Configure the service or reverse proxy to send appropriate browser security headers.</td>
-        <td>http://127.0.0.1:3100/</td>
-      </tr>
-<tr>
-        <td>security</td>
-        <td>security</td>
-        <td>cors-policy</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Runtime response allows requests from any origin with Access-Control-Allow-Origin: *.</td>
-        <td>Restrict CORS to explicitly trusted origins unless unrestricted public access is intentional.</td>
-        <td>http://127.0.0.1:3100/</td>
-      </tr>
-<tr>
-        <td>security</td>
-        <td>security</td>
-        <td>debug-endpoints</td>
-        <td>pass</td>
+        <td>runtime-security</td>
+        <td>skipped</td>
         <td>info</td>
-        <td>No common debug or API documentation endpoints returned a successful response.</td>
-        <td>Continue reviewing framework-specific debug routes separately.</td>
-        <td></td>
+        <td>Runtime security checks skipped because the configured service is unreachable.</td>
+        <td>Start the local target service and rerun the audit to inspect runtime security behavior.</td>
+        <td>http://127.0.0.1:3100/</td>
       </tr>
 <tr>
         <td>api</td>
         <td>api</td>
         <td>api-runtime</td>
-        <td>pass</td>
+        <td>skipped</td>
         <td>info</td>
-        <td>API runtime service is reachable at the configured baseUrl.</td>
-        <td>Review configured endpoint findings and keep the runtime target configuration current.</td>
-        <td>http://127.0.0.1:3100</td>
+        <td>API runtime checks skipped because the configured local service is unreachable.</td>
+        <td>Start the local API service and rerun the audit. Review static fallback evidence while the service is dormant.</td>
+        <td>http://127.0.0.1:3100/health</td>
       </tr>
 <tr>
         <td>api</td>
         <td>api</td>
-        <td>endpoint:Health</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>Health endpoint returned status 200 in 2ms with the expected basic response shape.</td>
-        <td>Keep endpoint expectations current as the API contract evolves.</td>
-        <td>http://127.0.0.1:3100/health, status=200, durationMs=2, contentType=application/json; charset=utf-8</td>
-      </tr>
-<tr>
-        <td>api</td>
-        <td>api</td>
-        <td>endpoint:Users</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>Users endpoint returned status 200 in 2ms with the expected basic response shape.</td>
-        <td>Keep endpoint expectations current as the API contract evolves.</td>
-        <td>http://127.0.0.1:3100/api/users, status=200, durationMs=2, contentType=application/json; charset=utf-8</td>
+        <td>static-contract-fallback</td>
+        <td>warn</td>
+        <td>low</td>
+        <td>API runtime checks were skipped and no common API contract or source hints were found.</td>
+        <td>Add an OpenAPI file or document route, controller, and schema locations to support dormant-project API analysis.</td>
+        <td></td>
       </tr>
 <tr>
         <td>ui</td>
         <td>ui</td>
         <td>ui-runtime</td>
-        <td>pass</td>
+        <td>skipped</td>
         <td>info</td>
-        <td>UI runtime service is reachable and Playwright Chromium launched successfully.</td>
-        <td>Review configured page findings and keep the runtime target configuration current.</td>
-        <td>http://127.0.0.1:3100</td>
+        <td>UI runtime checks skipped because the configured local service is unreachable.</td>
+        <td>Start the local UI service and rerun the audit to enable Playwright checks.</td>
+        <td>http://127.0.0.1:3100/</td>
       </tr>
 <tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:mobile:load</td>
-        <td>pass</td>
+        <td>ai-risk-review</td>
+        <td>ai</td>
+        <td>llm-execution</td>
+        <td>skipped</td>
         <td>info</td>
-        <td>Home loaded at mobile with status 200.</td>
-        <td>Keep this page path covered as the UI evolves.</td>
-        <td>http://127.0.0.1:3100/, viewport=390x844</td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:mobile:console-errors</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Home emitted 2 browser console errors at mobile.</td>
-        <td>Investigate and remove unexpected browser console errors.</td>
-        <td>Intentional demo UI console error for QA audit detection., Failed to load resource: the server responded with a status of 404 (Not Found)</td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:mobile:broken-images</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Home contains 1 broken image at mobile.</td>
-        <td>Fix or remove image references that do not load successfully.</td>
-        <td>/images/missing-dashboard-preview.png</td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:mobile:missing-alt</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Home contains 1 image without alt text at mobile.</td>
-        <td>Add meaningful alt text for informative images or an empty alt attribute for decorative images.</td>
-        <td>/images/missing-dashboard-preview.png</td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:mobile:accessibility-baseline</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>Home passed the lightweight accessibility baseline at mobile.</td>
-        <td>Run a dedicated accessibility tool for broader WCAG coverage.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:desktop:load</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>Home loaded at desktop with status 200.</td>
-        <td>Keep this page path covered as the UI evolves.</td>
-        <td>http://127.0.0.1:3100/, viewport=1440x900</td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:desktop:console-errors</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Home emitted 2 browser console errors at desktop.</td>
-        <td>Investigate and remove unexpected browser console errors.</td>
-        <td>Intentional demo UI console error for QA audit detection., Failed to load resource: the server responded with a status of 404 (Not Found)</td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:desktop:broken-images</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Home contains 1 broken image at desktop.</td>
-        <td>Fix or remove image references that do not load successfully.</td>
-        <td>/images/missing-dashboard-preview.png</td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:desktop:missing-alt</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Home contains 1 image without alt text at desktop.</td>
-        <td>Add meaningful alt text for informative images or an empty alt attribute for decorative images.</td>
-        <td>/images/missing-dashboard-preview.png</td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>page:Home:desktop:accessibility-baseline</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>Home passed the lightweight accessibility baseline at desktop.</td>
-        <td>Run a dedicated accessibility tool for broader WCAG coverage.</td>
+        <td>LLM analysis was not executed: OPENAI_API_KEY is not configured</td>
+        <td>Configure OPENAI_API_KEY only when paid contextual AI review is intended. The deterministic fallback remains available without it.</td>
         <td></td>
       </tr>
 <tr>
         <td>ai-risk-review</td>
         <td>ai</td>
-        <td>ai-risk-review-placeholder</td>
-        <td>skipped</td>
-        <td>info</td>
-        <td>AI risk review is optional and disabled.</td>
-        <td>Implement bounded AI analysis with a documented no-key fallback.</td>
-        <td></td>
+        <td>fallback:install-command</td>
+        <td>warn</td>
+        <td>low</td>
+        <td>Setup documentation does not show an install command.</td>
+        <td>Document one reproducible dependency installation command.</td>
+        <td>README.md</td>
+      </tr>
+<tr>
+        <td>ai-risk-review</td>
+        <td>ai</td>
+        <td>fallback:run-command</td>
+        <td>warn</td>
+        <td>low</td>
+        <td>Setup documentation does not show how to run the target project.</td>
+        <td>Document the command required to start the local project.</td>
+        <td>README.md</td>
+      </tr>
+<tr>
+        <td>ai-risk-review</td>
+        <td>ai</td>
+        <td>fallback:environment-documentation</td>
+        <td>warn</td>
+        <td>low</td>
+        <td>Setup documentation does not describe environment-variable requirements.</td>
+        <td>Document required and optional environment variables, using safe example values only.</td>
+        <td>README.md</td>
+      </tr>
+<tr>
+        <td>ai-risk-review</td>
+        <td>ai</td>
+        <td>fallback:test-or-audit-command</td>
+        <td>warn</td>
+        <td>low</td>
+        <td>Setup documentation does not show a test or audit command.</td>
+        <td>Document at least one validation command and the expected result.</td>
+        <td>README.md</td>
       </tr></tbody>
   </table>
 </body>

@@ -121,7 +121,30 @@ Console errors are warnings by default and can be promoted to failures with `ui.
 
 The accessibility baseline is deliberately small and does not replace axe-core, manual keyboard testing, assistive-technology testing, or a WCAG audit. Visual regression, responsive layout assertions, and form workflows remain future work.
 
-AI integration and tests remain intentionally unimplemented.
+## AI Risk Review
+
+> **Optional paid API warning:** AI Risk Review is optional. When `OPENAI_API_KEY` is configured and `ai.enabled` is `true`, the scanner sends a bounded documentation and contract context to the configured OpenAI model. OpenAI API usage may incur cost. The audit works without an API key by running a deterministic documentation fallback.
+
+The AI scanner is intended for contextual risks that simple pattern checks cannot reliably assess:
+
+- ambiguous setup instructions
+- unclear API contracts
+- missing error-handling expectations
+- missing test strategy
+- risky assumptions in human-written documentation
+
+Rule-based scanners remain responsible for missing files, explicit patterns, runtime status codes, headers, and browser behavior. The LLM check is not decorative: it reviews a limited set of README, package, route, OpenAPI, and schema files for quality risks that require interpretation.
+
+Without `OPENAI_API_KEY`, the fallback clearly reports that LLM analysis was not executed and checks README documentation for:
+
+- install command
+- run command
+- environment-variable documentation
+- test or audit command
+
+The scanner limits the number and size of files sent to the provider, does not read `.env` files for AI context, and degrades gracefully if the API call fails. AI output is advisory and must be validated before acting.
+
+Tests remain intentionally unimplemented.
 
 ## Planning Notes
 

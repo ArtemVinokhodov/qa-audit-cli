@@ -41,9 +41,11 @@
     "failOnConsoleErrors": false
   },
   "ai": {
-    "enabled": false,
+    "enabled": true,
     "provider": "openai",
-    "model": "configure-with-env-if-enabled",
-    "apiKeyEnv": "OPENAI_API_KEY"
+    "model": "gpt-4o-mini",
+    "apiKeyEnv": "OPENAI_API_KEY",
+    "maxFiles": 8,
+    "fallbackMode": "heuristic"
   }
 }
