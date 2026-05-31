@@ -12,10 +12,10 @@
 </head>
 <body>
   <h1>QA Audit Report</h1>
-  <p>Generated: 2026-05-31T13:08:04.942Z</p>
+  <p>Generated: 2026-05-31T13:34:58.477Z</p>
   <p>Target: C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</p>
   <h2>Overall Summary</h2>
-  <p>Total: 17; Pass: 7; Warn: 6; Fail: 0; Skipped: 4</p>
+  <p>Total: 19; Pass: 10; Warn: 6; Fail: 0; Skipped: 3</p>
   <h2>Findings</h2>
   <table>
     <thead><tr><th>Scanner</th><th>Category</th><th>Check</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th><th>Evidence</th></tr></thead>
@@ -162,12 +162,32 @@
 <tr>
         <td>api</td>
         <td>api</td>
-        <td>api-placeholder</td>
-        <td>skipped</td>
+        <td>api-runtime</td>
+        <td>pass</td>
         <td>info</td>
-        <td>API scanner placeholder found configured runtime context but did not probe it.</td>
-        <td>Implement reachability probing before API runtime checks.</td>
-        <td></td>
+        <td>API runtime service is reachable at the configured baseUrl.</td>
+        <td>Review configured endpoint findings and keep the runtime target configuration current.</td>
+        <td>http://127.0.0.1:3100</td>
+      </tr>
+<tr>
+        <td>api</td>
+        <td>api</td>
+        <td>endpoint:Health</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Health endpoint returned status 200 in 1ms with the expected basic response shape.</td>
+        <td>Keep endpoint expectations current as the API contract evolves.</td>
+        <td>http://127.0.0.1:3100/health, status=200, durationMs=1, contentType=application/json; charset=utf-8</td>
+      </tr>
+<tr>
+        <td>api</td>
+        <td>api</td>
+        <td>endpoint:Users</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Users endpoint returned status 200 in 2ms with the expected basic response shape.</td>
+        <td>Keep endpoint expectations current as the API contract evolves.</td>
+        <td>http://127.0.0.1:3100/api/users, status=200, durationMs=2, contentType=application/json; charset=utf-8</td>
       </tr>
 <tr>
         <td>ui</td>

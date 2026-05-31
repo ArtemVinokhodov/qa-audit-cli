@@ -15,3 +15,22 @@ export async function probeUrl(url: string, timeoutMs = 3_000): Promise<HttpProb
     };
   }
 }
+
+export interface TimedHttpResponse {
+  response?: Response;
+  durationMs: number;
+  error?: string;
+}
+
+export async function fetchWithTiming(url: string, timeoutMs = 3_000): Promise<TimedHttpResponse> {
+  const startedAt = performance.now();
+  try {
+    const response = await fetch(url, { method: "GET", signal: AbortSignal.timeout(timeoutMs) });
+    return { response, durationMs: Math.round(performance.now() - startedAt) };
+  } catch (error) {
+    return {
+      durationMs: Math.round(performance.now() - startedAt),
+      error: error instanceof Error ? error.message : "Unknown HTTP request error",
+    };
+  }
+}

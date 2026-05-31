@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-31T13:08:04.942Z",
+  "generatedAt": "2026-05-31T13:34:58.477Z",
   "targetProjectPath": "C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project",
   "summary": {
-    "total": 17,
-    "pass": 7,
+    "total": 19,
+    "pass": 10,
     "warn": 6,
     "fail": 0,
-    "skipped": 4
+    "skipped": 3
   },
   "items": [
     {
@@ -157,11 +157,44 @@
     {
       "scanner": "api",
       "category": "api",
-      "checkName": "api-placeholder",
-      "status": "skipped",
+      "checkName": "api-runtime",
+      "status": "pass",
       "severity": "info",
-      "finding": "API scanner placeholder found configured runtime context but did not probe it.",
-      "recommendation": "Implement reachability probing before API runtime checks."
+      "finding": "API runtime service is reachable at the configured baseUrl.",
+      "recommendation": "Review configured endpoint findings and keep the runtime target configuration current.",
+      "evidence": [
+        "http://127.0.0.1:3100"
+      ]
+    },
+    {
+      "scanner": "api",
+      "category": "api",
+      "checkName": "endpoint:Health",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Health endpoint returned status 200 in 1ms with the expected basic response shape.",
+      "recommendation": "Keep endpoint expectations current as the API contract evolves.",
+      "evidence": [
+        "http://127.0.0.1:3100/health",
+        "status=200",
+        "durationMs=1",
+        "contentType=application/json; charset=utf-8"
+      ]
+    },
+    {
+      "scanner": "api",
+      "category": "api",
+      "checkName": "endpoint:Users",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Users endpoint returned status 200 in 2ms with the expected basic response shape.",
+      "recommendation": "Keep endpoint expectations current as the API contract evolves.",
+      "evidence": [
+        "http://127.0.0.1:3100/api/users",
+        "status=200",
+        "durationMs=2",
+        "contentType=application/json; charset=utf-8"
+      ]
     },
     {
       "scanner": "ui",

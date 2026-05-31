@@ -56,7 +56,8 @@ The current implementation includes:
 - shared report types
 - static repository scanner
 - static and reachable-only runtime security scanner
-- placeholder API, UI, and AI scanners
+- runtime API scanner with dormant-project fallback
+- placeholder UI and AI scanners
 - JSON and HTML report generation
 - reproducible intentionally flawed Express demo project
 
@@ -90,7 +91,20 @@ When the configured API or UI `baseUrl` is reachable, it also checks:
 
 Secret detection is heuristic and reports warnings rather than claiming confirmed exposure. Dependency auditing currently supports npm lockfiles only. Runtime checks do not brute-force endpoints, authenticate, or replace a penetration test.
 
-API contract checks, Playwright checks, AI integration, and tests remain intentionally unimplemented.
+## API Scanner
+
+The API scanner uses `api.baseUrl` and configured endpoint definitions only. When the local service is reachable, it checks:
+
+- the configured health endpoint
+- configured representative API endpoints
+- expected status codes
+- expected content types
+- basic JSON validity and top-level object or array shape for JSON responses
+- response time against `api.latencyWarnMs`
+
+When the service is unreachable or API runtime context is missing, the scanner returns skipped runtime findings and searches the target project for common dormant-project hints: OpenAPI or Swagger files and route, controller, or schema directories. This fallback reports possible future contract-analysis inputs; it does not infer or validate contracts yet.
+
+Playwright checks, AI integration, and tests remain intentionally unimplemented.
 
 ## Planning Notes
 

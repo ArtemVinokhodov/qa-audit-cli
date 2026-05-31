@@ -3,8 +3,20 @@
   "outputDir": "./reports",
   "api": {
     "baseUrl": "http://127.0.0.1:3100",
-    "healthPath": "/health",
-    "endpoints": ["/api/users"]
+    "latencyWarnMs": 1000,
+    "healthEndpoint": {
+      "path": "/health",
+      "expectedStatus": 200,
+      "expectedContentType": "application/json"
+    },
+    "endpoints": [
+      {
+        "name": "Users",
+        "path": "/api/users",
+        "expectedStatus": 200,
+        "expectedContentType": "application/json"
+      }
+    ]
   },
   "ui": {
     "baseUrl": "http://127.0.0.1:3100",

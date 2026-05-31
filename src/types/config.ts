@@ -1,7 +1,15 @@
+export interface ApiEndpointConfig {
+  name?: string;
+  path: string;
+  expectedStatus?: number;
+  expectedContentType?: string;
+}
+
 export interface ApiConfig {
   baseUrl?: string;
-  healthPath?: string;
-  endpoints?: string[];
+  healthEndpoint?: ApiEndpointConfig;
+  endpoints?: ApiEndpointConfig[];
+  latencyWarnMs?: number;
 }
 
 export interface UiConfig {
