@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-05-31T11:56:43.666Z",
+  "targetProjectPath": "C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project",
+  "summary": {
+    "total": 5,
+    "pass": 1,
+    "warn": 0,
+    "fail": 0,
+    "skipped": 4
+  },
+  "items": [
+    {
+      "scanner": "repository",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Repository scanner placeholder is configured for C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project.",
+      "recommendation": "Implement manifest, lock file, ignore file, CI, and lint configuration checks."
+    },
+    {
+      "scanner": "security",
+      "status": "skipped",
+      "severity": "info",
+      "finding": "Security scanner placeholder has not executed static or runtime checks.",
+      "recommendation": "Implement secret heuristics, dependency audit support, and runtime header checks."
+    },
+    {
+      "scanner": "api",
+      "status": "skipped",
+      "severity": "info",
+      "finding": "API scanner placeholder found configured runtime context but did not probe it.",
+      "recommendation": "Implement reachability probing before API runtime checks."
+    },
+    {
+      "scanner": "ui",
+      "status": "skipped",
+      "severity": "info",
+      "finding": "UI scanner placeholder found configured browser context but did not launch Playwright.",
+      "recommendation": "Implement reachability probing and Playwright browser checks."
+    },
+    {
+      "scanner": "ai-risk-review",
+      "status": "skipped",
+      "severity": "info",
+      "finding": "AI risk review is optional and disabled.",
+      "recommendation": "Implement bounded AI analysis with a documented no-key fallback."
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>QA Audit Report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; color: #202938; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #d7dde5; padding: 0.6rem; text-align: left; vertical-align: top; }
+    th { background: #eef3f8; }
+  </style>
+</head>
+<body>
+  <h1>QA Audit Report</h1>
+  <p>Generated: 2026-05-31T11:56:43.666Z</p>
+  <p>Target: C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</p>
+  <h2>Overall Summary</h2>
+  <p>Total: 5; Pass: 1; Warn: 0; Fail: 0; Skipped: 4</p>
+  <h2>Findings</h2>
+  <table>
+    <thead><tr><th>Scanner</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th></tr></thead>
+    <tbody><tr>
+        <td>repository</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Repository scanner placeholder is configured for C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project.</td>
+        <td>Implement manifest, lock file, ignore file, CI, and lint configuration checks.</td>
+      </tr>
+<tr>
+        <td>security</td>
+        <td>skipped</td>
+        <td>info</td>
+        <td>Security scanner placeholder has not executed static or runtime checks.</td>
+        <td>Implement secret heuristics, dependency audit support, and runtime header checks.</td>
+      </tr>
+<tr>
+        <td>api</td>
+        <td>skipped</td>
+        <td>info</td>
+        <td>API scanner placeholder found configured runtime context but did not probe it.</td>
+        <td>Implement reachability probing before API runtime checks.</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>skipped</td>
+        <td>info</td>
+        <td>UI scanner placeholder found configured browser context but did not launch Playwright.</td>
+        <td>Implement reachability probing and Playwright browser checks.</td>
+      </tr>
+<tr>
+        <td>ai-risk-review</td>
+        <td>skipped</td>
+        <td>info</td>
+        <td>AI risk review is optional and disabled.</td>
+        <td>Implement bounded AI analysis with a documented no-key fallback.</td>
+      </tr></tbody>
+  </table>
+</body>
+</html>

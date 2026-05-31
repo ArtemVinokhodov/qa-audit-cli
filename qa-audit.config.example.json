@@ -1,0 +1,18 @@
+{
+  "projectPath": "./demo-project",
+  "outputDir": "./reports",
+  "api": {
+    "baseUrl": "http://127.0.0.1:3100",
+    "healthPath": "/health"
+  },
+  "ui": {
+    "baseUrl": "http://127.0.0.1:3100",
+    "pages": ["/"]
+  },
+  "ai": {
+    "enabled": false,
+    "provider": "openai",
+    "model": "configure-with-env-if-enabled",
+    "apiKeyEnv": "OPENAI_API_KEY"
+  }
+}

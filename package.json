@@ -1,0 +1,19 @@
+{
+  "name": "qa-audit-cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Config-driven TypeScript and Playwright QA audit CLI",
+  "scripts": {
+    "build": "tsc",
+    "audit": "npm run build --silent && node dist/cli.js --config qa-audit.config.example.json",
+    "audit:demo": "npm run audit -- --config qa-audit.config.example.json",
+    "demo:start": "node -e \"console.log('Demo project implementation is planned for a later increment.')\"",
+    "demo:install": "node -e \"console.log('Demo project has no dependencies in the initial skeleton.')\"",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "playwright": "^1.52.0",
+    "typescript": "^5.8.0"
+  }
+}
