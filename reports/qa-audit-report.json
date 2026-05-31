@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-31T12:59:26.657Z",
+  "generatedAt": "2026-05-31T13:08:04.942Z",
   "targetProjectPath": "C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project",
   "summary": {
-    "total": 11,
-    "pass": 3,
-    "warn": 3,
+    "total": 17,
+    "pass": 7,
+    "warn": 6,
     "fail": 0,
-    "skipped": 5
+    "skipped": 4
   },
   "items": [
     {
@@ -84,11 +84,75 @@
     {
       "scanner": "security",
       "category": "security",
-      "checkName": "security-placeholder",
-      "status": "skipped",
+      "checkName": "env-files",
+      "status": "pass",
       "severity": "info",
-      "finding": "Security scanner placeholder has not executed static or runtime checks.",
-      "recommendation": "Implement secret heuristics, dependency audit support, and runtime header checks."
+      "finding": "No non-example .env files were found in the target project.",
+      "recommendation": "Keep real environment files out of version control and provide sanitized .env.example files where useful."
+    },
+    {
+      "scanner": "security",
+      "category": "security",
+      "checkName": "secret-like-patterns",
+      "status": "warn",
+      "severity": "high",
+      "finding": "Found 2 secret-like pattern matches in selected text files. Matches are heuristic and may include safe fixtures or placeholders.",
+      "recommendation": "Review each match. Move real secrets to environment variables or a secret manager and rotate any credential that may have been exposed.",
+      "evidence": [
+        "fixtures/intentional-fake-secret.env: API_KEY assignment",
+        "fixtures/intentional-fake-secret.env: sk_ prefix"
+      ]
+    },
+    {
+      "scanner": "security",
+      "category": "security",
+      "checkName": "dependency-audit",
+      "status": "pass",
+      "severity": "info",
+      "finding": "npm audit reported no critical or high severity vulnerabilities.",
+      "recommendation": "Continue monitoring dependency advisories and review lower severity findings separately."
+    },
+    {
+      "scanner": "security",
+      "category": "security",
+      "checkName": "risky-scripts",
+      "status": "pass",
+      "severity": "info",
+      "finding": "No obvious debug exposure patterns were found in package.json scripts.",
+      "recommendation": "Continue reviewing runtime deployment configuration separately."
+    },
+    {
+      "scanner": "security",
+      "category": "security",
+      "checkName": "security-headers",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Runtime response is missing recommended security headers: content-security-policy, x-frame-options, x-content-type-options, referrer-policy.",
+      "recommendation": "Configure the service or reverse proxy to send appropriate browser security headers.",
+      "evidence": [
+        "http://127.0.0.1:3100/"
+      ]
+    },
+    {
+      "scanner": "security",
+      "category": "security",
+      "checkName": "cors-policy",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Runtime response allows requests from any origin with Access-Control-Allow-Origin: *.",
+      "recommendation": "Restrict CORS to explicitly trusted origins unless unrestricted public access is intentional.",
+      "evidence": [
+        "http://127.0.0.1:3100/"
+      ]
+    },
+    {
+      "scanner": "security",
+      "category": "security",
+      "checkName": "debug-endpoints",
+      "status": "pass",
+      "severity": "info",
+      "finding": "No common debug or API documentation endpoints returned a successful response.",
+      "recommendation": "Continue reviewing framework-specific debug routes separately."
     },
     {
       "scanner": "api",

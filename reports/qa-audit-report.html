@@ -12,10 +12,10 @@
 </head>
 <body>
   <h1>QA Audit Report</h1>
-  <p>Generated: 2026-05-31T12:59:26.657Z</p>
+  <p>Generated: 2026-05-31T13:08:04.942Z</p>
   <p>Target: C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</p>
   <h2>Overall Summary</h2>
-  <p>Total: 11; Pass: 3; Warn: 3; Fail: 0; Skipped: 5</p>
+  <p>Total: 17; Pass: 7; Warn: 6; Fail: 0; Skipped: 4</p>
   <h2>Findings</h2>
   <table>
     <thead><tr><th>Scanner</th><th>Category</th><th>Check</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th><th>Evidence</th></tr></thead>
@@ -92,11 +92,71 @@
 <tr>
         <td>security</td>
         <td>security</td>
-        <td>security-placeholder</td>
-        <td>skipped</td>
+        <td>env-files</td>
+        <td>pass</td>
         <td>info</td>
-        <td>Security scanner placeholder has not executed static or runtime checks.</td>
-        <td>Implement secret heuristics, dependency audit support, and runtime header checks.</td>
+        <td>No non-example .env files were found in the target project.</td>
+        <td>Keep real environment files out of version control and provide sanitized .env.example files where useful.</td>
+        <td></td>
+      </tr>
+<tr>
+        <td>security</td>
+        <td>security</td>
+        <td>secret-like-patterns</td>
+        <td>warn</td>
+        <td>high</td>
+        <td>Found 2 secret-like pattern matches in selected text files. Matches are heuristic and may include safe fixtures or placeholders.</td>
+        <td>Review each match. Move real secrets to environment variables or a secret manager and rotate any credential that may have been exposed.</td>
+        <td>fixtures/intentional-fake-secret.env: API_KEY assignment, fixtures/intentional-fake-secret.env: sk_ prefix</td>
+      </tr>
+<tr>
+        <td>security</td>
+        <td>security</td>
+        <td>dependency-audit</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>npm audit reported no critical or high severity vulnerabilities.</td>
+        <td>Continue monitoring dependency advisories and review lower severity findings separately.</td>
+        <td></td>
+      </tr>
+<tr>
+        <td>security</td>
+        <td>security</td>
+        <td>risky-scripts</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>No obvious debug exposure patterns were found in package.json scripts.</td>
+        <td>Continue reviewing runtime deployment configuration separately.</td>
+        <td></td>
+      </tr>
+<tr>
+        <td>security</td>
+        <td>security</td>
+        <td>security-headers</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Runtime response is missing recommended security headers: content-security-policy, x-frame-options, x-content-type-options, referrer-policy.</td>
+        <td>Configure the service or reverse proxy to send appropriate browser security headers.</td>
+        <td>http://127.0.0.1:3100/</td>
+      </tr>
+<tr>
+        <td>security</td>
+        <td>security</td>
+        <td>cors-policy</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Runtime response allows requests from any origin with Access-Control-Allow-Origin: *.</td>
+        <td>Restrict CORS to explicitly trusted origins unless unrestricted public access is intentional.</td>
+        <td>http://127.0.0.1:3100/</td>
+      </tr>
+<tr>
+        <td>security</td>
+        <td>security</td>
+        <td>debug-endpoints</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>No common debug or API documentation endpoints returned a successful response.</td>
+        <td>Continue reviewing framework-specific debug routes separately.</td>
         <td></td>
       </tr>
 <tr>

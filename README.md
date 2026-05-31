@@ -55,7 +55,8 @@ The current implementation includes:
 - CLI entry point and config loading
 - shared report types
 - static repository scanner
-- placeholder security, API, UI, and AI scanners
+- static and reachable-only runtime security scanner
+- placeholder API, UI, and AI scanners
 - JSON and HTML report generation
 - reproducible intentionally flawed Express demo project
 
@@ -72,7 +73,24 @@ The static repository scanner checks:
 
 The scanner intentionally uses lightweight file-based heuristics. It does not parse CI workflows, validate lint rules, inspect monorepo workspaces deeply, or detect every possible build tool and lint framework.
 
-Security scanning, runtime probing, Playwright checks, AI integration, and tests remain intentionally unimplemented.
+## Security Scanner
+
+The security scanner always runs static checks for:
+
+- non-example `.env` files
+- secret-like patterns in selected text files, excluding `.git`, `node_modules`, `dist`, `build`, and `reports`
+- critical and high severity Node dependency vulnerabilities through `npm audit --json` when `package.json` and `package-lock.json` are present
+- cautious debug exposure indicators in `package.json` scripts
+
+When the configured API or UI `baseUrl` is reachable, it also checks:
+
+- `content-security-policy`, `x-frame-options`, `x-content-type-options`, and `referrer-policy`
+- wildcard CORS
+- a small fixed GET-only list of common debug and API documentation paths
+
+Secret detection is heuristic and reports warnings rather than claiming confirmed exposure. Dependency auditing currently supports npm lockfiles only. Runtime checks do not brute-force endpoints, authenticate, or replace a penetration test.
+
+API contract checks, Playwright checks, AI integration, and tests remain intentionally unimplemented.
 
 ## Planning Notes
 

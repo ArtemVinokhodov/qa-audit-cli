@@ -61,3 +61,33 @@ export async function findFilesByExtension(
   await visit(rootPath);
   return matches;
 }
+
+export async function findFiles(
+  rootPath: string,
+  ignoredDirectories = new Set(["node_modules", ".git", "dist", "build", "reports"]),
+): Promise<string[]> {
+  const matches: string[] = [];
+
+  async function visit(directoryPath: string): Promise<void> {
+    let entries;
+    try {
+      entries = await readdir(directoryPath, { withFileTypes: true });
+    } catch {
+      return;
+    }
+
+    for (const entry of entries) {
+      const entryPath = path.join(directoryPath, entry.name);
+      if (entry.isDirectory()) {
+        if (!ignoredDirectories.has(entry.name)) {
+          await visit(entryPath);
+        }
+      } else if (entry.isFile()) {
+        matches.push(entryPath);
+      }
+    }
+  }
+
+  await visit(rootPath);
+  return matches;
+}
