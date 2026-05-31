@@ -20,7 +20,25 @@
   },
   "ui": {
     "baseUrl": "http://127.0.0.1:3100",
-    "pages": ["/"]
+    "pages": [
+      {
+        "name": "Home",
+        "path": "/"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "width": 390,
+        "height": 844
+      },
+      {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900
+      }
+    ],
+    "failOnConsoleErrors": false
   },
   "ai": {
     "enabled": false,

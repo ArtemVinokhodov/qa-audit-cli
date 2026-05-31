@@ -12,9 +12,22 @@ export interface ApiConfig {
   latencyWarnMs?: number;
 }
 
+export interface UiPageConfig {
+  name?: string;
+  path: string;
+}
+
+export interface UiBreakpointConfig {
+  name?: string;
+  width: number;
+  height: number;
+}
+
 export interface UiConfig {
   baseUrl?: string;
-  pages?: string[];
+  pages?: UiPageConfig[];
+  breakpoints?: UiBreakpointConfig[];
+  failOnConsoleErrors?: boolean;
 }
 
 export interface AiConfig {

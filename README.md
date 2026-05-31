@@ -6,6 +6,7 @@ Initial scaffold for a config-driven TypeScript + Playwright QA audit CLI. The t
 
 ```bash
 npm install
+npm run playwright:install
 npm run build
 npm run audit -- --config qa-audit.config.example.json
 ```
@@ -46,6 +47,7 @@ Target URLs, ports, paths, and future credentials must come from config or envir
 - `npm run audit:demo`: run the audit against the example demo configuration.
 - `npm run demo:start`: start the local Express demo target.
 - `npm run demo:install`: install demo-project dependencies.
+- `npm run playwright:install`: install Chromium for Playwright UI checks.
 - `npm run clean`: remove compiled output.
 
 ## Current Status
@@ -57,7 +59,8 @@ The current implementation includes:
 - static repository scanner
 - static and reachable-only runtime security scanner
 - runtime API scanner with dormant-project fallback
-- placeholder UI and AI scanners
+- Playwright UI scanner
+- placeholder AI scanner
 - JSON and HTML report generation
 - reproducible intentionally flawed Express demo project
 
@@ -104,7 +107,21 @@ The API scanner uses `api.baseUrl` and configured endpoint definitions only. Whe
 
 When the service is unreachable or API runtime context is missing, the scanner returns skipped runtime findings and searches the target project for common dormant-project hints: OpenAPI or Swagger files and route, controller, or schema directories. This fallback reports possible future contract-analysis inputs; it does not infer or validate contracts yet.
 
-Playwright checks, AI integration, and tests remain intentionally unimplemented.
+## UI Scanner
+
+The UI scanner runs only when `ui.baseUrl` is reachable. It launches Playwright Chromium and checks configured pages across configured breakpoints for:
+
+- navigation status
+- browser console errors
+- broken images
+- images missing alt text
+- a lightweight accessibility baseline: document title, document language, main heading, form-control labels, and button accessible names
+
+Console errors are warnings by default and can be promoted to failures with `ui.failOnConsoleErrors`. Page and breakpoint checks are isolated so one navigation failure does not stop the remaining UI audit. Chromium is always closed after the run.
+
+The accessibility baseline is deliberately small and does not replace axe-core, manual keyboard testing, assistive-technology testing, or a WCAG audit. Visual regression, responsive layout assertions, and form workflows remain future work.
+
+AI integration and tests remain intentionally unimplemented.
 
 ## Planning Notes
 

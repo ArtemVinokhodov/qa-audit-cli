@@ -12,10 +12,10 @@
 </head>
 <body>
   <h1>QA Audit Report</h1>
-  <p>Generated: 2026-05-31T13:34:58.477Z</p>
+  <p>Generated: 2026-05-31T13:46:10.849Z</p>
   <p>Target: C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</p>
   <h2>Overall Summary</h2>
-  <p>Total: 19; Pass: 10; Warn: 6; Fail: 0; Skipped: 3</p>
+  <p>Total: 29; Pass: 15; Warn: 12; Fail: 0; Skipped: 2</p>
   <h2>Findings</h2>
   <table>
     <thead><tr><th>Scanner</th><th>Category</th><th>Check</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th><th>Evidence</th></tr></thead>
@@ -175,9 +175,9 @@
         <td>endpoint:Health</td>
         <td>pass</td>
         <td>info</td>
-        <td>Health endpoint returned status 200 in 1ms with the expected basic response shape.</td>
+        <td>Health endpoint returned status 200 in 2ms with the expected basic response shape.</td>
         <td>Keep endpoint expectations current as the API contract evolves.</td>
-        <td>http://127.0.0.1:3100/health, status=200, durationMs=1, contentType=application/json; charset=utf-8</td>
+        <td>http://127.0.0.1:3100/health, status=200, durationMs=2, contentType=application/json; charset=utf-8</td>
       </tr>
 <tr>
         <td>api</td>
@@ -192,11 +192,111 @@
 <tr>
         <td>ui</td>
         <td>ui</td>
-        <td>ui-placeholder</td>
-        <td>skipped</td>
+        <td>ui-runtime</td>
+        <td>pass</td>
         <td>info</td>
-        <td>UI scanner placeholder found configured browser context but did not launch Playwright.</td>
-        <td>Implement reachability probing and Playwright browser checks.</td>
+        <td>UI runtime service is reachable and Playwright Chromium launched successfully.</td>
+        <td>Review configured page findings and keep the runtime target configuration current.</td>
+        <td>http://127.0.0.1:3100</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:mobile:load</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Home loaded at mobile with status 200.</td>
+        <td>Keep this page path covered as the UI evolves.</td>
+        <td>http://127.0.0.1:3100/, viewport=390x844</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:mobile:console-errors</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Home emitted 2 browser console errors at mobile.</td>
+        <td>Investigate and remove unexpected browser console errors.</td>
+        <td>Intentional demo UI console error for QA audit detection., Failed to load resource: the server responded with a status of 404 (Not Found)</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:mobile:broken-images</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Home contains 1 broken image at mobile.</td>
+        <td>Fix or remove image references that do not load successfully.</td>
+        <td>/images/missing-dashboard-preview.png</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:mobile:missing-alt</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Home contains 1 image without alt text at mobile.</td>
+        <td>Add meaningful alt text for informative images or an empty alt attribute for decorative images.</td>
+        <td>/images/missing-dashboard-preview.png</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:mobile:accessibility-baseline</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Home passed the lightweight accessibility baseline at mobile.</td>
+        <td>Run a dedicated accessibility tool for broader WCAG coverage.</td>
+        <td></td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:desktop:load</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Home loaded at desktop with status 200.</td>
+        <td>Keep this page path covered as the UI evolves.</td>
+        <td>http://127.0.0.1:3100/, viewport=1440x900</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:desktop:console-errors</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Home emitted 2 browser console errors at desktop.</td>
+        <td>Investigate and remove unexpected browser console errors.</td>
+        <td>Intentional demo UI console error for QA audit detection., Failed to load resource: the server responded with a status of 404 (Not Found)</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:desktop:broken-images</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Home contains 1 broken image at desktop.</td>
+        <td>Fix or remove image references that do not load successfully.</td>
+        <td>/images/missing-dashboard-preview.png</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:desktop:missing-alt</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Home contains 1 image without alt text at desktop.</td>
+        <td>Add meaningful alt text for informative images or an empty alt attribute for decorative images.</td>
+        <td>/images/missing-dashboard-preview.png</td>
+      </tr>
+<tr>
+        <td>ui</td>
+        <td>ui</td>
+        <td>page:Home:desktop:accessibility-baseline</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Home passed the lightweight accessibility baseline at desktop.</td>
+        <td>Run a dedicated accessibility tool for broader WCAG coverage.</td>
         <td></td>
       </tr>
 <tr>

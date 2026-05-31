@@ -9,6 +9,7 @@
     "audit:demo": "npm run audit -- --config qa-audit.config.example.json",
     "demo:start": "cd demo-project && npm start",
     "demo:install": "cd demo-project && npm install",
+    "playwright:install": "playwright install chromium",
     "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\""
   },
   "devDependencies": {

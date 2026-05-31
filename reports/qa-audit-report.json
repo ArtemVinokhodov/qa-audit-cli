@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-31T13:34:58.477Z",
+  "generatedAt": "2026-05-31T13:46:10.849Z",
   "targetProjectPath": "C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project",
   "summary": {
-    "total": 19,
-    "pass": 10,
-    "warn": 6,
+    "total": 29,
+    "pass": 15,
+    "warn": 12,
     "fail": 0,
-    "skipped": 3
+    "skipped": 2
   },
   "items": [
     {
@@ -172,12 +172,12 @@
       "checkName": "endpoint:Health",
       "status": "pass",
       "severity": "info",
-      "finding": "Health endpoint returned status 200 in 1ms with the expected basic response shape.",
+      "finding": "Health endpoint returned status 200 in 2ms with the expected basic response shape.",
       "recommendation": "Keep endpoint expectations current as the API contract evolves.",
       "evidence": [
         "http://127.0.0.1:3100/health",
         "status=200",
-        "durationMs=1",
+        "durationMs=2",
         "contentType=application/json; charset=utf-8"
       ]
     },
@@ -199,11 +199,132 @@
     {
       "scanner": "ui",
       "category": "ui",
-      "checkName": "ui-placeholder",
-      "status": "skipped",
+      "checkName": "ui-runtime",
+      "status": "pass",
       "severity": "info",
-      "finding": "UI scanner placeholder found configured browser context but did not launch Playwright.",
-      "recommendation": "Implement reachability probing and Playwright browser checks."
+      "finding": "UI runtime service is reachable and Playwright Chromium launched successfully.",
+      "recommendation": "Review configured page findings and keep the runtime target configuration current.",
+      "evidence": [
+        "http://127.0.0.1:3100"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:mobile:load",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Home loaded at mobile with status 200.",
+      "recommendation": "Keep this page path covered as the UI evolves.",
+      "evidence": [
+        "http://127.0.0.1:3100/",
+        "viewport=390x844"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:mobile:console-errors",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Home emitted 2 browser console errors at mobile.",
+      "recommendation": "Investigate and remove unexpected browser console errors.",
+      "evidence": [
+        "Intentional demo UI console error for QA audit detection.",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:mobile:broken-images",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Home contains 1 broken image at mobile.",
+      "recommendation": "Fix or remove image references that do not load successfully.",
+      "evidence": [
+        "/images/missing-dashboard-preview.png"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:mobile:missing-alt",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Home contains 1 image without alt text at mobile.",
+      "recommendation": "Add meaningful alt text for informative images or an empty alt attribute for decorative images.",
+      "evidence": [
+        "/images/missing-dashboard-preview.png"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:mobile:accessibility-baseline",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Home passed the lightweight accessibility baseline at mobile.",
+      "recommendation": "Run a dedicated accessibility tool for broader WCAG coverage."
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:desktop:load",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Home loaded at desktop with status 200.",
+      "recommendation": "Keep this page path covered as the UI evolves.",
+      "evidence": [
+        "http://127.0.0.1:3100/",
+        "viewport=1440x900"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:desktop:console-errors",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Home emitted 2 browser console errors at desktop.",
+      "recommendation": "Investigate and remove unexpected browser console errors.",
+      "evidence": [
+        "Intentional demo UI console error for QA audit detection.",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:desktop:broken-images",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Home contains 1 broken image at desktop.",
+      "recommendation": "Fix or remove image references that do not load successfully.",
+      "evidence": [
+        "/images/missing-dashboard-preview.png"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:desktop:missing-alt",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Home contains 1 image without alt text at desktop.",
+      "recommendation": "Add meaningful alt text for informative images or an empty alt attribute for decorative images.",
+      "evidence": [
+        "/images/missing-dashboard-preview.png"
+      ]
+    },
+    {
+      "scanner": "ui",
+      "category": "ui",
+      "checkName": "page:Home:desktop:accessibility-baseline",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Home passed the lightweight accessibility baseline at desktop.",
+      "recommendation": "Run a dedicated accessibility tool for broader WCAG coverage."
     },
     {
       "scanner": "ai-risk-review",
