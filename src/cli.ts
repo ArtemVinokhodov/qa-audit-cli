@@ -18,15 +18,38 @@ function readConfigPath(args: string[]): string | undefined {
   return configPath;
 }
 
+function createNarrative(summary: Omit<ReportSummary, "narrative">): string {
+  if (summary.fail > 0) {
+    return `Audit completed with ${summary.fail} failed check${summary.fail === 1 ? "" : "s"} and ${summary.warn} warning${summary.warn === 1 ? "" : "s"}. Prioritize failed checks before release.`;
+  }
+  if (summary.warn > 0) {
+    return `Audit completed without failed checks. Review ${summary.warn} warning${summary.warn === 1 ? "" : "s"} and confirm whether each risk is acceptable or requires remediation.`;
+  }
+  if (summary.skipped > 0) {
+    return `Audit completed without failures or warnings. ${summary.skipped} check${summary.skipped === 1 ? " was" : "s were"} skipped because optional context was unavailable.`;
+  }
+  return "Audit completed with all checks passing.";
+}
+
 function createSummary(items: ReportItem[]): ReportSummary {
-  return items.reduce<ReportSummary>(
+  const counts = items.reduce<Omit<ReportSummary, "narrative">>(
     (summary, item) => {
       summary.total += 1;
       summary[item.status] += 1;
+      summary.severityCounts[item.severity] += 1;
       return summary;
     },
-    { total: 0, pass: 0, warn: 0, fail: 0, skipped: 0 },
+    {
+      total: 0,
+      pass: 0,
+      warn: 0,
+      fail: 0,
+      skipped: 0,
+      severityCounts: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
+    },
   );
+
+  return { ...counts, narrative: createNarrative(counts) };
 }
 
 async function run(): Promise<void> {
@@ -42,12 +65,13 @@ async function run(): Promise<void> {
   const report: AuditReport = {
     generatedAt: new Date().toISOString(),
     targetProjectPath: config.projectPath,
+    baseUrl: config.api?.baseUrl ?? config.ui?.baseUrl,
     summary: createSummary(items),
     items,
   };
 
-  const jsonPath = await writeJsonReport(report, config.outputDir);
-  const htmlPath = await writeHtmlReport(report, config.outputDir);
+  const jsonPath = await writeJsonReport(report, config.report.outputDir);
+  const htmlPath = await writeHtmlReport(report, config.report.outputDir);
   logInfo(`JSON report: ${jsonPath}`);
   logInfo(`HTML report: ${htmlPath}`);
 }

@@ -11,7 +11,7 @@ npm run build
 npm run audit -- --config qa-audit.config.example.json
 ```
 
-Generated reports are written to `reports/`.
+Generated reports are written to the configured `report.outputDir`.
 
 ## Demo Project
 
@@ -40,6 +40,16 @@ npm run audit -- --config path/to/config.json
 
 Target URLs, ports, paths, and future credentials must come from config or environment variables. Example target values are isolated in `qa-audit.config.example.json`.
 
+Report output is configured separately:
+
+```json
+{
+  "report": {
+    "outputDir": "./reports"
+  }
+}
+```
+
 ## Available Scripts
 
 - `npm run build`: compile TypeScript.
@@ -60,7 +70,7 @@ The current implementation includes:
 - static and reachable-only runtime security scanner
 - runtime API scanner with dormant-project fallback
 - Playwright UI scanner
-- placeholder AI scanner
+- optional AI Risk Review with deterministic no-key fallback
 - JSON and HTML report generation
 - reproducible intentionally flawed Express demo project
 
@@ -143,6 +153,17 @@ Without `OPENAI_API_KEY`, the fallback clearly reports that LLM analysis was not
 - test or audit command
 
 The scanner limits the number and size of files sent to the provider, does not read `.env` files for AI context, and degrades gracefully if the API call fails. AI output is advisory and must be validated before acting.
+
+## Report Formats
+
+Each audit writes two reports to `report.outputDir`:
+
+- `qa-audit-report.json`: canonical machine-readable report
+- `qa-audit-report.html`: self-contained review artifact with inline CSS
+
+Both formats contain the target project, configured base URL when available, generated timestamp, overall summary, and the actual scanner findings. Every finding includes status, severity, category, check name, finding text, recommendation, and evidence when available.
+
+The overall summary includes total, pass, warn, fail, and skipped counts, severity counts, and a short narrative. The HTML report groups findings by category and visually prioritizes failures and warnings for review.
 
 Tests remain intentionally unimplemented.
 

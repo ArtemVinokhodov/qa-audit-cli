@@ -39,9 +39,13 @@ export interface AiConfig {
   fallbackMode?: "heuristic";
 }
 
+export interface ReportConfig {
+  outputDir: string;
+}
+
 export interface AuditConfig {
   projectPath: string;
-  outputDir: string;
+  report: ReportConfig;
   api?: ApiConfig;
   ui?: UiConfig;
   ai?: AiConfig;

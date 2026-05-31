@@ -20,11 +20,14 @@ export interface ReportSummary {
   warn: number;
   fail: number;
   skipped: number;
+  severityCounts: Record<ReportSeverity, number>;
+  narrative: string;
 }
 
 export interface AuditReport {
   generatedAt: string;
   targetProjectPath: string;
+  baseUrl?: string;
   summary: ReportSummary;
   items: ReportItem[];
 }

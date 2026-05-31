@@ -1,12 +1,21 @@
 {
-  "generatedAt": "2026-05-31T13:52:18.932Z",
+  "generatedAt": "2026-05-31T13:58:30.585Z",
   "targetProjectPath": "C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project",
+  "baseUrl": "http://127.0.0.1:3100",
   "summary": {
     "total": 20,
     "pass": 6,
     "warn": 9,
     "fail": 0,
-    "skipped": 5
+    "skipped": 5,
+    "severityCounts": {
+      "critical": 0,
+      "high": 1,
+      "medium": 1,
+      "low": 7,
+      "info": 11
+    },
+    "narrative": "Audit completed without failed checks. Review 9 warnings and confirm whether each risk is acceptable or requires remediation."
   },
   "items": [
     {

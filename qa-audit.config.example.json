@@ -1,6 +1,8 @@
 {
   "projectPath": "./demo-project",
-  "outputDir": "./reports",
+  "report": {
+    "outputDir": "./reports"
+  },
   "api": {
     "baseUrl": "http://127.0.0.1:3100",
     "latencyWarnMs": 1000,

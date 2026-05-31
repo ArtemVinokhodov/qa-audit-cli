@@ -27,15 +27,19 @@ function validateConfig(value: unknown): AuditConfig {
     throw new Error("Config must be a JSON object.");
   }
 
-  const config = value as Partial<AuditConfig>;
+  const config = value as Partial<AuditConfig> & { outputDir?: unknown };
   if (typeof config.projectPath !== "string" || config.projectPath.length === 0) {
     throw new Error("Config field 'projectPath' is required.");
   }
-  if (typeof config.outputDir !== "string" || config.outputDir.length === 0) {
-    throw new Error("Config field 'outputDir' is required.");
+  const outputDir = config.report?.outputDir ?? config.outputDir;
+  if (typeof outputDir !== "string" || outputDir.length === 0) {
+    throw new Error("Config field 'report.outputDir' is required.");
   }
 
-  return config as AuditConfig;
+  return {
+    ...config,
+    report: { outputDir },
+  } as AuditConfig;
 }
 
 export async function loadConfig(configPath = DEFAULT_CONFIG_PATH): Promise<AuditConfig> {
@@ -48,6 +52,9 @@ export async function loadConfig(configPath = DEFAULT_CONFIG_PATH): Promise<Audi
   return {
     ...config,
     projectPath: path.resolve(configDirectory, config.projectPath),
-    outputDir: path.resolve(configDirectory, config.outputDir),
+    report: {
+      ...config.report,
+      outputDir: path.resolve(configDirectory, config.report.outputDir),
+    },
   };
 }

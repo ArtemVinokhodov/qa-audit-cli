@@ -2,223 +2,322 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>QA Audit Report</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; color: #202938; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #d7dde5; padding: 0.6rem; text-align: left; vertical-align: top; }
-    th { background: #eef3f8; }
+    :root { color-scheme: light; --bg: #f4f7fb; --surface: #fff; --border: #d9e1ec; --text: #172033; --muted: #61708a; --pass: #147d55; --warn: #ad6400; --fail: #b42318; --skipped: #667085; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 Arial, sans-serif; }
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 20px 56px; }
+    h1 { margin: 0 0 6px; font-size: 30px; }
+    h2 { display: flex; align-items: baseline; gap: 8px; margin: 30px 0 12px; font-size: 21px; text-transform: capitalize; }
+    h2 span { color: var(--muted); font-size: 13px; font-weight: normal; }
+    .meta, .narrative, .severity-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .meta { display: grid; gap: 5px; margin: 18px 0; }
+    .meta strong { display: inline-block; min-width: 92px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 14px 0; }
+    .summary-card { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 12px 14px; }
+    .summary-card span { display: block; color: var(--muted); font-size: 12px; text-transform: uppercase; }
+    .summary-card strong { display: block; margin-top: 4px; font-size: 25px; }
+    .summary-pass strong { color: var(--pass); } .summary-warn strong { color: var(--warn); } .summary-fail strong { color: var(--fail); } .summary-skipped strong { color: var(--skipped); }
+    .severity-panel { color: var(--muted); }
+    .severity-panel span { margin-right: 18px; }
+    .finding-list { display: grid; gap: 10px; }
+    .finding { border: 1px solid var(--border); border-left: 5px solid var(--border); border-radius: 8px; background: var(--surface); padding: 14px 16px; }
+    .finding-fail { border-left-color: var(--fail); } .finding-warn { border-left-color: var(--warn); } .finding-pass { border-left-color: var(--pass); } .finding-skipped { border-left-color: var(--skipped); }
+    .finding-header { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .status, .severity { display: inline-block; border-radius: 999px; padding: 2px 8px; margin-right: 5px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+    .status-pass { background: #e9f7f0; color: var(--pass); } .status-warn { background: #fff4dd; color: var(--warn); } .status-fail { background: #feecea; color: var(--fail); } .status-skipped { background: #eef0f3; color: var(--skipped); }
+    .severity { background: #f0f4fa; color: #40516d; }
+    code { color: #40516d; overflow-wrap: anywhere; }
+    .finding-text { margin: 12px 0 7px; }
+    .recommendation { margin: 0; color: #344054; }
+    .evidence { margin-top: 10px; color: var(--muted); font-size: 13px; }
+    .evidence ul { margin: 4px 0 0; padding-left: 20px; }
   </style>
 </head>
 <body>
+<main>
   <h1>QA Audit Report</h1>
-  <p>Generated: 2026-05-31T13:52:18.932Z</p>
-  <p>Target: C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</p>
+  <p>Structured quality review generated from the configured scanner pipeline.</p>
+  <div class="meta">
+    <div><strong>Generated</strong> 2026-05-31T13:58:30.585Z</div>
+    <div><strong>Target path</strong> C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</div>
+    <div><strong>Base URL</strong> http://127.0.0.1:3100</div>
+  </div>
   <h2>Overall Summary</h2>
-  <p>Total: 20; Pass: 6; Warn: 9; Fail: 0; Skipped: 5</p>
+  <div class="summary-grid">
+    <div class="summary-card summary-total"><span>Total</span><strong>20</strong></div>
+    <div class="summary-card summary-pass"><span>Pass</span><strong>6</strong></div>
+    <div class="summary-card summary-warn"><span>Warn</span><strong>9</strong></div>
+    <div class="summary-card summary-fail"><span>Fail</span><strong>0</strong></div>
+    <div class="summary-card summary-skipped"><span>Skipped</span><strong>5</strong></div>
+  </div>
+  <p class="narrative">Audit completed without failed checks. Review 9 warnings and confirm whether each risk is acceptable or requires remediation.</p>
+  <div class="severity-panel">
+    <strong>Severity counts:</strong>
+    <span>Critical 0</span>
+    <span>High 1</span>
+    <span>Medium 1</span>
+    <span>Low 7</span>
+    <span>Info 11</span>
+  </div>
   <h2>Findings</h2>
-  <table>
-    <thead><tr><th>Scanner</th><th>Category</th><th>Check</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th><th>Evidence</th></tr></thead>
-    <tbody><tr>
-        <td>repository</td>
-        <td>repository</td>
-        <td>stack-detection</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>Detected project stack: Node.</td>
-        <td>Review stack-specific findings and keep repository manifests up to date.</td>
-        <td>package.json</td>
-      </tr>
-<tr>
-        <td>repository</td>
-        <td>repository</td>
-        <td>node-package-manifest</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>Node package manifest package.json is present.</td>
-        <td>Keep package.json dependency and script metadata current.</td>
-        <td>package.json</td>
-      </tr>
-<tr>
-        <td>repository</td>
-        <td>repository</td>
-        <td>node-lock-file</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>Node dependency lock file is present: package-lock.json.</td>
-        <td>Commit one lock file and keep it synchronized with package.json.</td>
-        <td>package-lock.json</td>
-      </tr>
-<tr>
-        <td>repository</td>
-        <td>repository</td>
-        <td>typescript-config</td>
-        <td>skipped</td>
-        <td>info</td>
-        <td>TypeScript configuration check skipped because TypeScript usage was not detected.</td>
-        <td>No action is required unless TypeScript sources are added.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>repository</td>
-        <td>repository</td>
-        <td>gitignore-presence</td>
-        <td>warn</td>
-        <td>medium</td>
-        <td>Repository does not contain a .gitignore file.</td>
-        <td>Add a .gitignore file and exclude dependencies, local environment files, generated reports, and build output.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>repository</td>
-        <td>repository</td>
-        <td>ci-config</td>
-        <td>warn</td>
-        <td>low</td>
-        <td>No .github/workflows CI configuration directory was found.</td>
-        <td>Add CI configuration to run repeatable validation on changes.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>repository</td>
-        <td>repository</td>
-        <td>lint-config</td>
-        <td>warn</td>
-        <td>low</td>
-        <td>No supported ESLint or Biome configuration was found.</td>
-        <td>Add an ESLint, Biome, or equivalent lint configuration and run it in CI.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>security</td>
-        <td>security</td>
-        <td>env-files</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>No non-example .env files were found in the target project.</td>
-        <td>Keep real environment files out of version control and provide sanitized .env.example files where useful.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>security</td>
-        <td>security</td>
-        <td>secret-like-patterns</td>
-        <td>warn</td>
-        <td>high</td>
-        <td>Found 2 secret-like pattern matches in selected text files. Matches are heuristic and may include safe fixtures or placeholders.</td>
-        <td>Review each match. Move real secrets to environment variables or a secret manager and rotate any credential that may have been exposed.</td>
-        <td>fixtures/intentional-fake-secret.env: API_KEY assignment, fixtures/intentional-fake-secret.env: sk_ prefix</td>
-      </tr>
-<tr>
-        <td>security</td>
-        <td>security</td>
-        <td>dependency-audit</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>npm audit reported no critical or high severity vulnerabilities.</td>
-        <td>Continue monitoring dependency advisories and review lower severity findings separately.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>security</td>
-        <td>security</td>
-        <td>risky-scripts</td>
-        <td>pass</td>
-        <td>info</td>
-        <td>No obvious debug exposure patterns were found in package.json scripts.</td>
-        <td>Continue reviewing runtime deployment configuration separately.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>security</td>
-        <td>security</td>
-        <td>runtime-security</td>
-        <td>skipped</td>
-        <td>info</td>
-        <td>Runtime security checks skipped because the configured service is unreachable.</td>
-        <td>Start the local target service and rerun the audit to inspect runtime security behavior.</td>
-        <td>http://127.0.0.1:3100/</td>
-      </tr>
-<tr>
-        <td>api</td>
-        <td>api</td>
-        <td>api-runtime</td>
-        <td>skipped</td>
-        <td>info</td>
-        <td>API runtime checks skipped because the configured local service is unreachable.</td>
-        <td>Start the local API service and rerun the audit. Review static fallback evidence while the service is dormant.</td>
-        <td>http://127.0.0.1:3100/health</td>
-      </tr>
-<tr>
-        <td>api</td>
-        <td>api</td>
-        <td>static-contract-fallback</td>
-        <td>warn</td>
-        <td>low</td>
-        <td>API runtime checks were skipped and no common API contract or source hints were found.</td>
-        <td>Add an OpenAPI file or document route, controller, and schema locations to support dormant-project API analysis.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>ui</td>
-        <td>ui</td>
-        <td>ui-runtime</td>
-        <td>skipped</td>
-        <td>info</td>
-        <td>UI runtime checks skipped because the configured local service is unreachable.</td>
-        <td>Start the local UI service and rerun the audit to enable Playwright checks.</td>
-        <td>http://127.0.0.1:3100/</td>
-      </tr>
-<tr>
-        <td>ai-risk-review</td>
-        <td>ai</td>
-        <td>llm-execution</td>
-        <td>skipped</td>
-        <td>info</td>
-        <td>LLM analysis was not executed: OPENAI_API_KEY is not configured</td>
-        <td>Configure OPENAI_API_KEY only when paid contextual AI review is intended. The deterministic fallback remains available without it.</td>
-        <td></td>
-      </tr>
-<tr>
-        <td>ai-risk-review</td>
-        <td>ai</td>
-        <td>fallback:install-command</td>
-        <td>warn</td>
-        <td>low</td>
-        <td>Setup documentation does not show an install command.</td>
-        <td>Document one reproducible dependency installation command.</td>
-        <td>README.md</td>
-      </tr>
-<tr>
-        <td>ai-risk-review</td>
-        <td>ai</td>
-        <td>fallback:run-command</td>
-        <td>warn</td>
-        <td>low</td>
-        <td>Setup documentation does not show how to run the target project.</td>
-        <td>Document the command required to start the local project.</td>
-        <td>README.md</td>
-      </tr>
-<tr>
-        <td>ai-risk-review</td>
-        <td>ai</td>
-        <td>fallback:environment-documentation</td>
-        <td>warn</td>
-        <td>low</td>
-        <td>Setup documentation does not describe environment-variable requirements.</td>
-        <td>Document required and optional environment variables, using safe example values only.</td>
-        <td>README.md</td>
-      </tr>
-<tr>
-        <td>ai-risk-review</td>
-        <td>ai</td>
-        <td>fallback:test-or-audit-command</td>
-        <td>warn</td>
-        <td>low</td>
-        <td>Setup documentation does not show a test or audit command.</td>
-        <td>Document at least one validation command and the expected result.</td>
-        <td>README.md</td>
-      </tr></tbody>
-  </table>
+  <section class="category">
+        <h2>ai <span>5 checks</span></h2>
+        <div class="finding-list"><article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-low">low</span>
+      </div>
+      <code>fallback:environment-documentation</code>
+    </header>
+    <p class="finding-text">Setup documentation does not describe environment-variable requirements.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Document required and optional environment variables, using safe example values only.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>README.md</li></ul></div>
+  </article>
+<article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-low">low</span>
+      </div>
+      <code>fallback:install-command</code>
+    </header>
+    <p class="finding-text">Setup documentation does not show an install command.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Document one reproducible dependency installation command.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>README.md</li></ul></div>
+  </article>
+<article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-low">low</span>
+      </div>
+      <code>fallback:run-command</code>
+    </header>
+    <p class="finding-text">Setup documentation does not show how to run the target project.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Document the command required to start the local project.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>README.md</li></ul></div>
+  </article>
+<article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-low">low</span>
+      </div>
+      <code>fallback:test-or-audit-command</code>
+    </header>
+    <p class="finding-text">Setup documentation does not show a test or audit command.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Document at least one validation command and the expected result.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>README.md</li></ul></div>
+  </article>
+<article class="finding finding-skipped">
+    <header class="finding-header">
+      <div>
+        <span class="status status-skipped">skipped</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>llm-execution</code>
+    </header>
+    <p class="finding-text">LLM analysis was not executed: OPENAI_API_KEY is not configured</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Configure OPENAI_API_KEY only when paid contextual AI review is intended. The deterministic fallback remains available without it.</p>
+
+  </article></div>
+      </section>
+<section class="category">
+        <h2>api <span>2 checks</span></h2>
+        <div class="finding-list"><article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-low">low</span>
+      </div>
+      <code>static-contract-fallback</code>
+    </header>
+    <p class="finding-text">API runtime checks were skipped and no common API contract or source hints were found.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Add an OpenAPI file or document route, controller, and schema locations to support dormant-project API analysis.</p>
+
+  </article>
+<article class="finding finding-skipped">
+    <header class="finding-header">
+      <div>
+        <span class="status status-skipped">skipped</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>api-runtime</code>
+    </header>
+    <p class="finding-text">API runtime checks skipped because the configured local service is unreachable.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Start the local API service and rerun the audit. Review static fallback evidence while the service is dormant.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/health</li></ul></div>
+  </article></div>
+      </section>
+<section class="category">
+        <h2>repository <span>7 checks</span></h2>
+        <div class="finding-list"><article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-medium">medium</span>
+      </div>
+      <code>gitignore-presence</code>
+    </header>
+    <p class="finding-text">Repository does not contain a .gitignore file.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Add a .gitignore file and exclude dependencies, local environment files, generated reports, and build output.</p>
+
+  </article>
+<article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-low">low</span>
+      </div>
+      <code>ci-config</code>
+    </header>
+    <p class="finding-text">No .github/workflows CI configuration directory was found.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Add CI configuration to run repeatable validation on changes.</p>
+
+  </article>
+<article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-low">low</span>
+      </div>
+      <code>lint-config</code>
+    </header>
+    <p class="finding-text">No supported ESLint or Biome configuration was found.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Add an ESLint, Biome, or equivalent lint configuration and run it in CI.</p>
+
+  </article>
+<article class="finding finding-skipped">
+    <header class="finding-header">
+      <div>
+        <span class="status status-skipped">skipped</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>typescript-config</code>
+    </header>
+    <p class="finding-text">TypeScript configuration check skipped because TypeScript usage was not detected.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> No action is required unless TypeScript sources are added.</p>
+
+  </article>
+<article class="finding finding-pass">
+    <header class="finding-header">
+      <div>
+        <span class="status status-pass">pass</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>node-lock-file</code>
+    </header>
+    <p class="finding-text">Node dependency lock file is present: package-lock.json.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Commit one lock file and keep it synchronized with package.json.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>package-lock.json</li></ul></div>
+  </article>
+<article class="finding finding-pass">
+    <header class="finding-header">
+      <div>
+        <span class="status status-pass">pass</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>node-package-manifest</code>
+    </header>
+    <p class="finding-text">Node package manifest package.json is present.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Keep package.json dependency and script metadata current.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>package.json</li></ul></div>
+  </article>
+<article class="finding finding-pass">
+    <header class="finding-header">
+      <div>
+        <span class="status status-pass">pass</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>stack-detection</code>
+    </header>
+    <p class="finding-text">Detected project stack: Node.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Review stack-specific findings and keep repository manifests up to date.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>package.json</li></ul></div>
+  </article></div>
+      </section>
+<section class="category">
+        <h2>security <span>5 checks</span></h2>
+        <div class="finding-list"><article class="finding finding-warn">
+    <header class="finding-header">
+      <div>
+        <span class="status status-warn">warn</span>
+        <span class="severity severity-high">high</span>
+      </div>
+      <code>secret-like-patterns</code>
+    </header>
+    <p class="finding-text">Found 2 secret-like pattern matches in selected text files. Matches are heuristic and may include safe fixtures or placeholders.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Review each match. Move real secrets to environment variables or a secret manager and rotate any credential that may have been exposed.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>fixtures/intentional-fake-secret.env: API_KEY assignment</li><li>fixtures/intentional-fake-secret.env: sk_ prefix</li></ul></div>
+  </article>
+<article class="finding finding-skipped">
+    <header class="finding-header">
+      <div>
+        <span class="status status-skipped">skipped</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>runtime-security</code>
+    </header>
+    <p class="finding-text">Runtime security checks skipped because the configured service is unreachable.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Start the local target service and rerun the audit to inspect runtime security behavior.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/</li></ul></div>
+  </article>
+<article class="finding finding-pass">
+    <header class="finding-header">
+      <div>
+        <span class="status status-pass">pass</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>dependency-audit</code>
+    </header>
+    <p class="finding-text">npm audit reported no critical or high severity vulnerabilities.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Continue monitoring dependency advisories and review lower severity findings separately.</p>
+
+  </article>
+<article class="finding finding-pass">
+    <header class="finding-header">
+      <div>
+        <span class="status status-pass">pass</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>env-files</code>
+    </header>
+    <p class="finding-text">No non-example .env files were found in the target project.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Keep real environment files out of version control and provide sanitized .env.example files where useful.</p>
+
+  </article>
+<article class="finding finding-pass">
+    <header class="finding-header">
+      <div>
+        <span class="status status-pass">pass</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>risky-scripts</code>
+    </header>
+    <p class="finding-text">No obvious debug exposure patterns were found in package.json scripts.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Continue reviewing runtime deployment configuration separately.</p>
+
+  </article></div>
+      </section>
+<section class="category">
+        <h2>ui <span>1 checks</span></h2>
+        <div class="finding-list"><article class="finding finding-skipped">
+    <header class="finding-header">
+      <div>
+        <span class="status status-skipped">skipped</span>
+        <span class="severity severity-info">info</span>
+      </div>
+      <code>ui-runtime</code>
+    </header>
+    <p class="finding-text">UI runtime checks skipped because the configured local service is unreachable.</p>
+    <p class="recommendation"><strong>Recommendation:</strong> Start the local UI service and rerun the audit to enable Playwright checks.</p>
+<div class="evidence"><strong>Evidence</strong><ul><li>http://127.0.0.1:3100/</li></ul></div>
+  </article></div>
+      </section>
+</main>
 </body>
 </html>
