@@ -12,47 +12,122 @@
 </head>
 <body>
   <h1>QA Audit Report</h1>
-  <p>Generated: 2026-05-31T12:37:31.710Z</p>
+  <p>Generated: 2026-05-31T12:59:26.657Z</p>
   <p>Target: C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project</p>
   <h2>Overall Summary</h2>
-  <p>Total: 5; Pass: 1; Warn: 0; Fail: 0; Skipped: 4</p>
+  <p>Total: 11; Pass: 3; Warn: 3; Fail: 0; Skipped: 5</p>
   <h2>Findings</h2>
   <table>
-    <thead><tr><th>Scanner</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th></tr></thead>
+    <thead><tr><th>Scanner</th><th>Category</th><th>Check</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th><th>Evidence</th></tr></thead>
     <tbody><tr>
         <td>repository</td>
+        <td>repository</td>
+        <td>stack-detection</td>
         <td>pass</td>
         <td>info</td>
-        <td>Repository scanner placeholder is configured for C:\Users\artem\WebStormProjects\qa-audit-cli\demo-project.</td>
-        <td>Implement manifest, lock file, ignore file, CI, and lint configuration checks.</td>
+        <td>Detected project stack: Node.</td>
+        <td>Review stack-specific findings and keep repository manifests up to date.</td>
+        <td>package.json</td>
+      </tr>
+<tr>
+        <td>repository</td>
+        <td>repository</td>
+        <td>node-package-manifest</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Node package manifest package.json is present.</td>
+        <td>Keep package.json dependency and script metadata current.</td>
+        <td>package.json</td>
+      </tr>
+<tr>
+        <td>repository</td>
+        <td>repository</td>
+        <td>node-lock-file</td>
+        <td>pass</td>
+        <td>info</td>
+        <td>Node dependency lock file is present: package-lock.json.</td>
+        <td>Commit one lock file and keep it synchronized with package.json.</td>
+        <td>package-lock.json</td>
+      </tr>
+<tr>
+        <td>repository</td>
+        <td>repository</td>
+        <td>typescript-config</td>
+        <td>skipped</td>
+        <td>info</td>
+        <td>TypeScript configuration check skipped because TypeScript usage was not detected.</td>
+        <td>No action is required unless TypeScript sources are added.</td>
+        <td></td>
+      </tr>
+<tr>
+        <td>repository</td>
+        <td>repository</td>
+        <td>gitignore-presence</td>
+        <td>warn</td>
+        <td>medium</td>
+        <td>Repository does not contain a .gitignore file.</td>
+        <td>Add a .gitignore file and exclude dependencies, local environment files, generated reports, and build output.</td>
+        <td></td>
+      </tr>
+<tr>
+        <td>repository</td>
+        <td>repository</td>
+        <td>ci-config</td>
+        <td>warn</td>
+        <td>low</td>
+        <td>No .github/workflows CI configuration directory was found.</td>
+        <td>Add CI configuration to run repeatable validation on changes.</td>
+        <td></td>
+      </tr>
+<tr>
+        <td>repository</td>
+        <td>repository</td>
+        <td>lint-config</td>
+        <td>warn</td>
+        <td>low</td>
+        <td>No supported ESLint or Biome configuration was found.</td>
+        <td>Add an ESLint, Biome, or equivalent lint configuration and run it in CI.</td>
+        <td></td>
       </tr>
 <tr>
         <td>security</td>
+        <td>security</td>
+        <td>security-placeholder</td>
         <td>skipped</td>
         <td>info</td>
         <td>Security scanner placeholder has not executed static or runtime checks.</td>
         <td>Implement secret heuristics, dependency audit support, and runtime header checks.</td>
+        <td></td>
       </tr>
 <tr>
         <td>api</td>
+        <td>api</td>
+        <td>api-placeholder</td>
         <td>skipped</td>
         <td>info</td>
         <td>API scanner placeholder found configured runtime context but did not probe it.</td>
         <td>Implement reachability probing before API runtime checks.</td>
+        <td></td>
       </tr>
 <tr>
         <td>ui</td>
+        <td>ui</td>
+        <td>ui-placeholder</td>
         <td>skipped</td>
         <td>info</td>
         <td>UI scanner placeholder found configured browser context but did not launch Playwright.</td>
         <td>Implement reachability probing and Playwright browser checks.</td>
+        <td></td>
       </tr>
 <tr>
         <td>ai-risk-review</td>
+        <td>ai</td>
+        <td>ai-risk-review-placeholder</td>
         <td>skipped</td>
         <td>info</td>
         <td>AI risk review is optional and disabled.</td>
         <td>Implement bounded AI analysis with a documented no-key fallback.</td>
+        <td></td>
       </tr></tbody>
   </table>
 </body>

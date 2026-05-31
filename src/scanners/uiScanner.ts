@@ -6,6 +6,8 @@ export const uiScanner: Scanner = {
     return [
       {
         scanner: this.name,
+        category: "ui",
+        checkName: "ui-placeholder",
         status: "skipped",
         severity: "info",
         finding: config.ui?.baseUrl

@@ -1,23 +1,90 @@
 {
-  "generatedAt": "2026-05-31T12:37:31.710Z",
+  "generatedAt": "2026-05-31T12:59:26.657Z",
   "targetProjectPath": "C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project",
   "summary": {
-    "total": 5,
-    "pass": 1,
-    "warn": 0,
+    "total": 11,
+    "pass": 3,
+    "warn": 3,
     "fail": 0,
-    "skipped": 4
+    "skipped": 5
   },
   "items": [
     {
       "scanner": "repository",
+      "category": "repository",
+      "checkName": "stack-detection",
       "status": "pass",
       "severity": "info",
-      "finding": "Repository scanner placeholder is configured for C:\\Users\\artem\\WebStormProjects\\qa-audit-cli\\demo-project.",
-      "recommendation": "Implement manifest, lock file, ignore file, CI, and lint configuration checks."
+      "finding": "Detected project stack: Node.",
+      "recommendation": "Review stack-specific findings and keep repository manifests up to date.",
+      "evidence": [
+        "package.json"
+      ]
+    },
+    {
+      "scanner": "repository",
+      "category": "repository",
+      "checkName": "node-package-manifest",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Node package manifest package.json is present.",
+      "recommendation": "Keep package.json dependency and script metadata current.",
+      "evidence": [
+        "package.json"
+      ]
+    },
+    {
+      "scanner": "repository",
+      "category": "repository",
+      "checkName": "node-lock-file",
+      "status": "pass",
+      "severity": "info",
+      "finding": "Node dependency lock file is present: package-lock.json.",
+      "recommendation": "Commit one lock file and keep it synchronized with package.json.",
+      "evidence": [
+        "package-lock.json"
+      ]
+    },
+    {
+      "scanner": "repository",
+      "category": "repository",
+      "checkName": "typescript-config",
+      "status": "skipped",
+      "severity": "info",
+      "finding": "TypeScript configuration check skipped because TypeScript usage was not detected.",
+      "recommendation": "No action is required unless TypeScript sources are added."
+    },
+    {
+      "scanner": "repository",
+      "category": "repository",
+      "checkName": "gitignore-presence",
+      "status": "warn",
+      "severity": "medium",
+      "finding": "Repository does not contain a .gitignore file.",
+      "recommendation": "Add a .gitignore file and exclude dependencies, local environment files, generated reports, and build output."
+    },
+    {
+      "scanner": "repository",
+      "category": "repository",
+      "checkName": "ci-config",
+      "status": "warn",
+      "severity": "low",
+      "finding": "No .github/workflows CI configuration directory was found.",
+      "recommendation": "Add CI configuration to run repeatable validation on changes."
+    },
+    {
+      "scanner": "repository",
+      "category": "repository",
+      "checkName": "lint-config",
+      "status": "warn",
+      "severity": "low",
+      "finding": "No supported ESLint or Biome configuration was found.",
+      "recommendation": "Add an ESLint, Biome, or equivalent lint configuration and run it in CI."
     },
     {
       "scanner": "security",
+      "category": "security",
+      "checkName": "security-placeholder",
       "status": "skipped",
       "severity": "info",
       "finding": "Security scanner placeholder has not executed static or runtime checks.",
@@ -25,6 +92,8 @@
     },
     {
       "scanner": "api",
+      "category": "api",
+      "checkName": "api-placeholder",
       "status": "skipped",
       "severity": "info",
       "finding": "API scanner placeholder found configured runtime context but did not probe it.",
@@ -32,6 +101,8 @@
     },
     {
       "scanner": "ui",
+      "category": "ui",
+      "checkName": "ui-placeholder",
       "status": "skipped",
       "severity": "info",
       "finding": "UI scanner placeholder found configured browser context but did not launch Playwright.",
@@ -39,6 +110,8 @@
     },
     {
       "scanner": "ai-risk-review",
+      "category": "ai",
+      "checkName": "ai-risk-review-placeholder",
       "status": "skipped",
       "severity": "info",
       "finding": "AI risk review is optional and disabled.",

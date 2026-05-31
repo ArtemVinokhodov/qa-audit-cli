@@ -6,6 +6,8 @@ export const aiScanner: Scanner = {
     return [
       {
         scanner: this.name,
+        category: "ai",
+        checkName: "ai-risk-review-placeholder",
         status: "skipped",
         severity: "info",
         finding: config.ai?.enabled

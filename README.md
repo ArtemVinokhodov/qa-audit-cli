@@ -10,7 +10,7 @@ npm run build
 npm run audit -- --config qa-audit.config.example.json
 ```
 
-Generated placeholder reports are written to `reports/`.
+Generated reports are written to `reports/`.
 
 ## Demo Project
 
@@ -50,15 +50,29 @@ Target URLs, ports, paths, and future credentials must come from config or envir
 
 ## Current Status
 
-This increment provides the project skeleton only:
+The current implementation includes:
 
 - CLI entry point and config loading
 - shared report types
-- placeholder repository, security, API, UI, and AI scanners
-- JSON and HTML placeholder report generation
+- static repository scanner
+- placeholder security, API, UI, and AI scanners
+- JSON and HTML report generation
 - reproducible intentionally flawed Express demo project
 
-Scanner logic, runtime probing, Playwright checks, AI integration, and tests remain intentionally unimplemented.
+## Repository Scanner
+
+The static repository scanner checks:
+
+- detected stack indicators for Node/TypeScript, Python, Java, and Go
+- Node package manifest and supported lock files
+- TypeScript configuration when TypeScript usage is detected
+- `.gitignore` presence and expected ignore rules
+- `.github/workflows` CI directory presence
+- common ESLint and Biome lint configuration files
+
+The scanner intentionally uses lightweight file-based heuristics. It does not parse CI workflows, validate lint rules, inspect monorepo workspaces deeply, or detect every possible build tool and lint framework.
+
+Security scanning, runtime probing, Playwright checks, AI integration, and tests remain intentionally unimplemented.
 
 ## Planning Notes
 

@@ -17,10 +17,13 @@ export async function writeHtmlReport(report: AuditReport, outputDir: string): P
     .map(
       (item) => `<tr>
         <td>${escapeHtml(item.scanner)}</td>
+        <td>${escapeHtml(item.category)}</td>
+        <td>${escapeHtml(item.checkName)}</td>
         <td>${escapeHtml(item.status)}</td>
         <td>${escapeHtml(item.severity)}</td>
         <td>${escapeHtml(item.finding)}</td>
         <td>${escapeHtml(item.recommendation)}</td>
+        <td>${escapeHtml(item.evidence?.join(", ") ?? "")}</td>
       </tr>`,
     )
     .join("\n");
@@ -45,7 +48,7 @@ export async function writeHtmlReport(report: AuditReport, outputDir: string): P
   <p>Total: ${report.summary.total}; Pass: ${report.summary.pass}; Warn: ${report.summary.warn}; Fail: ${report.summary.fail}; Skipped: ${report.summary.skipped}</p>
   <h2>Findings</h2>
   <table>
-    <thead><tr><th>Scanner</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th></tr></thead>
+    <thead><tr><th>Scanner</th><th>Category</th><th>Check</th><th>Status</th><th>Severity</th><th>Finding</th><th>Recommendation</th><th>Evidence</th></tr></thead>
     <tbody>${rows}</tbody>
   </table>
 </body>

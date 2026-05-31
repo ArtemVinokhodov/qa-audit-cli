@@ -6,6 +6,8 @@ export const apiScanner: Scanner = {
     return [
       {
         scanner: this.name,
+        category: "api",
+        checkName: "api-placeholder",
         status: "skipped",
         severity: "info",
         finding: config.api?.baseUrl

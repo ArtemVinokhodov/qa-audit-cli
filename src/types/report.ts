@@ -5,10 +5,13 @@ export type ReportSeverity = "critical" | "high" | "medium" | "low" | "info";
 
 export interface ReportItem {
   scanner: string;
+  category: string;
+  checkName: string;
   status: ReportStatus;
   finding: string;
   severity: ReportSeverity;
   recommendation: string;
+  evidence?: string[];
 }
 
 export interface ReportSummary {
